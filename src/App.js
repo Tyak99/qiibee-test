@@ -7,6 +7,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Brands from './pages/Brands';
+import BrandView from './pages/BrandView';
 
 function App() {
   return (
@@ -19,8 +20,11 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/brands">
+        <Route exact path="/brands">
           <Brands />
+        </Route>
+        <Route path="/brand/">
+          <BrandView />
         </Route>
       </Switch>
     </ChakraProvider>
