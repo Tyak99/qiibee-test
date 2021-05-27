@@ -1,13 +1,17 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'focus-visible/dist/focus-visible';
 
 ReactDOM.render(
   <StrictMode>
     <ColorModeScript />
-    <App />
+    <Router>
+      <App />
+    </Router>
   </StrictMode>,
   document.getElementById('root'),
 );
