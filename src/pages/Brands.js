@@ -9,7 +9,8 @@ import Container from '../components/Container';
 
 const Brands = () => (
   <Container>
-    <Stats />
+    {/* <Stats /> */}
+    <Heading px={{ base: '4', lg: 0 }} size="md">Welcome, Babatunde</Heading>
     <Box mt="16">
       <Box px={{ base: '4', lg: 0 }}>
         <Heading size="md">Redeem Loyalty Tokens</Heading>

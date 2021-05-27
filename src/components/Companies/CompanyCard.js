@@ -19,7 +19,7 @@ const CompanyCard = ({ isFollowing }) => (
       borderRadius="md"
       _hover={{ backgroundColor: 'gray.200' }}
       p={{ base: '4', sm: '8' }}
-      mb="4"
+      mb="2"
       shadow="lg"
       w={{ base: '100%' }}
       cursor="pointer"

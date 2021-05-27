@@ -18,7 +18,7 @@ const Navbar = (props) => (
     alignItems="center"
     zIndex="1"
     bg="white"
-    display={{ base: 'flex', lg: 'none' }}
+    shadow="lg"
   >
     <Box>
       <Heading size="md" color="teal" cursor="pointer">

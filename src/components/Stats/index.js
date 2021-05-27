@@ -4,7 +4,7 @@ import { Box, Flex, Heading } from '@chakra-ui/layout';
 import { StatCard } from './StatCard';
 
 const Stats = (props) => (
-  <Box mt="8" p="4" maxW="md">
+  <Box py="4" maxW="md">
     <Heading size="md">Stats</Heading>
     <Flex justifyContent="space-between">
       <StatCard />
