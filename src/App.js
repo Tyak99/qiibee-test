@@ -8,7 +8,7 @@ import {
 function App() {
   return (
     <ChakraProvider theme={theme}>
-        <Text>Welcome here</Text>
+      <Text>Welcome here</Text>
     </ChakraProvider>
   );
 }
