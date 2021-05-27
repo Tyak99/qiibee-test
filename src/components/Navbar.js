@@ -11,7 +11,7 @@ const Navbar = (props) => (
     justifyContent="space-between"
     p={['4', '8']}
     position="fixed"
-    height="24"
+    height="20"
     top="0"
     left="0"
     right="0"

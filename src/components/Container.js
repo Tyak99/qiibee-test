@@ -8,7 +8,7 @@ const Container = ({ children }) => (
     {/* <Sidebar /> */}
     <Navbar />
     <Box w="100%" m="0 auto" h="100vh">
-      <Box m="0 auto" w={{ base: '100%', lg: '700px' }} bg="#F1F4FD" mt="24" py="4" px={{ base: 0, lg: '8' }}>
+      <Box m="0 auto" w={{ base: '100%', lg: '700px' }} bg="#F1F4FD" mt="20" py="4" px={{ base: 0, lg: '8' }} h="100%">
         <Box mt="8">
           {children}
         </Box>
