@@ -74,7 +74,19 @@ const Sidebar = () => (
 );
 
 const Navbar = () => (
-  <Flex justifyContent="space-between" p={['4', '8']} alignItems="center" bg="white" display={{ base: 'flex', lg: 'none' }}>
+  <Flex
+    justifyContent="space-between"
+    p={['4', '8']}
+    position="fixed"
+    height="24"
+    top="0"
+    left="0"
+    right="0"
+    alignItems="center"
+    zIndex="1"
+    bg="white"
+    display={{ base: 'flex', lg: 'none' }}
+  >
     <Box>
       <Heading size="md" color="teal" cursor="pointer">
         <Link as={RouterLink} to="/login">LoyalityFx</Link>
@@ -100,7 +112,7 @@ const Brands = () => (
       <Sidebar />
       <Box ml={{ base: 0, lg: '340px' }} w="100%" m="0 auto" bg="#F1F4FD">
         <Navbar />
-        <Box m="0 auto" w={{ base: '100%', lg: '800px' }} pl={{ lg: '2rem' }}>
+        <Box m="0 auto" w={{ base: '100%', lg: '800px' }} pl={{ lg: '2rem' }} mt="24">
           <Box mt="8" p="4" maxW="md">
             <Heading size="md">Stats</Heading>
             <Flex justifyContent="space-between">
