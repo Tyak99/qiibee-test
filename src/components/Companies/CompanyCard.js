@@ -28,19 +28,19 @@ const CompanyCard = ({ isFollowing }) => (
         <Avatar borderRadius="sm" />
         <Box>
           <Heading size="sm">Fibre Limited</Heading>
-          <Text display={{ base: 'block', sm: 'none' }}>FLX</Text>
+          <Text fontSize="sm">FLX</Text>
         </Box>
       </HStack>
-      <Text display={{ base: 'none', sm: 'block' }}>FLX</Text>
-      {
+      <Box>
+
+        <Text display={{ base: 'none', sm: 'block' }}>0 FLX</Text>
+        {
         isFollowing
       && (
-      <HStack color="teal">
-        <Icon as={FaCheck} />
-        <Text>Followed</Text>
-      </HStack>
+        <Text fontSize="xs" color="gray">Following</Text>
       )
       }
+      </Box>
     </Box>
   </Link>
 );

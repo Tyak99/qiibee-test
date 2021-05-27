@@ -42,6 +42,10 @@ const Brands = () => (
             <option value="option3">Option 3</option>
           </Select>
         </HStack>
+        <Flex justifyContent="space-between" px={{ base: '4', lg: 0 }} mt="8">
+          <Text>Company</Text>
+          <Text>Token Earned</Text>
+        </Flex>
         <CompanyList />
       </Box>
     </Box>
