@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Brands from './pages/Brands';
 import BrandView from './pages/BrandView';
+import BrandDashboard from './pages/BrandDashboard';
 
 function App() {
   return (
@@ -23,8 +24,8 @@ function App() {
         <Route exact path="/brands">
           <Brands />
         </Route>
-        <Route path="/brand/">
-          <BrandView />
+        <Route path="/dashboard">
+          <BrandDashboard />
         </Route>
       </Switch>
     </ChakraProvider>
