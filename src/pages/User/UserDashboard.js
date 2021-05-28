@@ -5,10 +5,10 @@ import {
 import React, { useState } from 'react';
 import { Select } from '@chakra-ui/select';
 import { useDisclosure } from '@chakra-ui/hooks';
-import Stats from '../components/Stats';
-import CompanyList from '../components/Companies';
-import Container from '../components/Container';
-import BrandView from './BrandView';
+import Stats from '../../components/Stats';
+import CompanyList from '../../components/Companies';
+import Container from '../../components/Container';
+import BrandView from './BrandViewModal';
 
 const Brands = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

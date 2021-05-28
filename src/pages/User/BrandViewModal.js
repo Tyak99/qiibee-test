@@ -13,7 +13,7 @@ import {
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import Container from '../components/Container';
+import Container from '../../components/Container';
 
 const BrandView = ({
   onOpen, isOpen, onClose, isFollowing, currentlySelectedBrand,
