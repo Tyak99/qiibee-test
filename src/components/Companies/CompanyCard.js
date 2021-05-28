@@ -9,40 +9,41 @@ import Icon from '@chakra-ui/icon';
 
 import PropTypes from 'prop-types';
 
-const CompanyCard = ({ isFollowing }) => (
-  <Link to="/brand/hmm" as={ReactRouterLink} _hover={{ underline: 'none' }}>
-    <Box
-      d="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      bg="white"
-      borderRadius="md"
-      _hover={{ backgroundColor: 'gray.200' }}
-      p={{ base: '4', sm: '4' }}
-      mb="2"
-      shadow="lg"
-      w={{ base: '100%' }}
-      cursor="pointer"
-    >
-      <HStack spacing="4">
-        <Avatar borderRadius="sm" />
-        <Box>
-          <Heading size="sm">Fibre Limited</Heading>
-          <Text fontSize="sm">FLX</Text>
-        </Box>
-      </HStack>
+const CompanyCard = ({ isFollowing, openBrand }) => (
+  // <Link to="/brand/hmm" as={ReactRouterLink} _hover={{ underline: 'none' }}>
+  <Box
+    d="flex"
+    justifyContent="space-between"
+    alignItems="center"
+    bg="white"
+    borderRadius="md"
+    _hover={{ backgroundColor: 'gray.200' }}
+    p={{ base: '4', sm: '4' }}
+    mb="2"
+    shadow="lg"
+    w={{ base: '100%' }}
+    cursor="pointer"
+    onClick={openBrand}
+  >
+    <HStack spacing="4">
+      <Avatar borderRadius="sm" />
       <Box>
+        <Heading size="sm">Fibre Limited</Heading>
+        <Text fontSize="sm">FLX</Text>
+      </Box>
+    </HStack>
+    <Box>
 
-        <Text display={{ base: 'none', sm: 'block' }}>0 FLX</Text>
-        {
+      <Text display={{ base: 'none', sm: 'block' }}>0 FLX</Text>
+      {
         isFollowing
       && (
         <Text fontSize="xs" color="gray">Following</Text>
       )
       }
-      </Box>
     </Box>
-  </Link>
+  </Box>
+  // </Link>
 );
 
 CompanyCard.defaultProps = {
@@ -51,6 +52,7 @@ CompanyCard.defaultProps = {
 
 CompanyCard.propTypes = {
   isFollowing: PropTypes.bool,
+  openBrand: PropTypes.func.isRequired,
 };
 
 export default CompanyCard;
