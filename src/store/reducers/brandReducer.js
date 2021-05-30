@@ -20,11 +20,11 @@ const brandsReducer = createSlice({
     },
   ],
   reducers: {
-    registerBrand: (state, action) => {
+    createBrand: (state, action) => {
       state.push(action.payload);
     },
   },
 });
 
-export const { registerBrand } = brandsReducer.actions;
+export const brandActions = brandsReducer.actions;
 export default brandsReducer.reducer;

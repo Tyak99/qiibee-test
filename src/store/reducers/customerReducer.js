@@ -12,6 +12,10 @@ const customersReducer = createSlice({
       followedBrand: 0,
     },
   ],
+  createCustomer: (state, action) => {
+    state.push(action.payload);
+  },
 });
 
+export const customerActions = customersReducer.actions;
 export default customersReducer.reducer;

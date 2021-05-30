@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Box, Heading, HStack, Link, Text, VStack,
@@ -9,15 +9,19 @@ import {
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { registerBrand } from '../../store/reducers/brandReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { brandActions } from '../../store/reducers/brandReducer';
+import { customerActions } from '../../store/reducers/customerReducer';
+import { authActions } from '../../store/reducers/authReducer';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
   const dispatch = useDispatch();
+  const authData = useSelector((state) => state.auth);
   const uploadImage = (files) => {
     // const formData = new FormData();
     // formData.append('file', files[0]);
@@ -28,9 +32,22 @@ const Register = () => {
     // }).catch((error) => console.log({ error }));
   };
 
-  const onSubmit = (data) => {
+  useEffect(() => {
+    if (authData.isAuthenticated === true) {
+      history.push('/dashboard');
+    }
+  }, [authData]);
+
+  const registerBrand = (data) => {
     const { image, ...inputData } = data;
-    dispatch(registerBrand(inputData));
+    dispatch(brandActions.createBrand(inputData));
+    dispatch(authActions.authenticateUser({ id: 'iewe', userType: 'brand' }));
+  };
+
+  const registerCustomer = (data) => {
+    const { image, ...inputData } = data;
+    dispatch(customerActions.createCustomer(inputData));
+    dispatch(authActions.authenticateUser({ id: 'iewe', userType: 'brand' }));
   };
 
   return (
@@ -52,7 +69,7 @@ const Register = () => {
                 <Heading size="lg">Register</Heading>
                 <Text>Please register as a brand here</Text>
                 <Box mt="8">
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(registerBrand)}>
                     <VStack spacing="4" alignItems="flex-start">
 
                       <HStack spacing="8">
@@ -93,7 +110,7 @@ const Register = () => {
                 <Text>Please register as a customer here</Text>
 
                 <Box mt="8">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit(registerCustomer)}>
                     <VStack spacing="4" alignItems="flex-start">
                       <HStack spacing="8">
                         <FormControl id="first-name" isRequired>
