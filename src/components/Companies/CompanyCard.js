@@ -25,7 +25,7 @@ const CompanyCard = ({ isFollowing, openBrand, brand }) => (
     shadow="lg"
     w={{ base: '100%' }}
     cursor="pointer"
-    onClick={openBrand}
+    onClick={() => openBrand(brand.id)}
   >
     <HStack spacing="4">
       <Avatar borderRadius="sm" />
@@ -38,6 +38,7 @@ const CompanyCard = ({ isFollowing, openBrand, brand }) => (
 
       <Text display={{ base: 'none', sm: 'block' }}>{`${brand.loyaltyPoints} ${brand.symbol}`}</Text>
       {
+
         isFollowing
       && (
         <Text fontSize="xs" color="gray">Following</Text>

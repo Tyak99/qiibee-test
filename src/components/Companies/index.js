@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { Box } from '@chakra-ui/layout';
 import CompanyCard from './CompanyCard';
 
-const CompanyList = ({ openBrand, brands }) => (
+const CompanyList = ({ openBrand, brands, customerId }) => (
   <Box mt="4">
     {
       brands.map((brand) => (
-        <CompanyCard openBrand={openBrand} brand={brand} key={brand.id} />
+        <CompanyCard
+          openBrand={openBrand}
+          brand={brand}
+          key={brand.id}
+          isFollowing={brand.followers[customerId]}
+        />
       ))
     }
   </Box>

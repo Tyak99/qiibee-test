@@ -13,7 +13,7 @@ import BrandView from './BrandViewModal';
 
 const Brands = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [currentlySelectedBrand, setCurrentlySelectedBrand] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
   const auth = useSelector((state) => state.auth);
   const customers = useSelector((state) => state.customers);
   const brands = useSelector((state) => state.brands);
@@ -21,6 +21,12 @@ const Brands = () => {
   const {
     firstName, lastName, followedBrands, totalLoyaltyPoints,
   } = customers.find((customer) => customer.id === auth.id);
+
+  const handleBrandModal = (brandId) => {
+    const foundBrand = brands.find((brand) => brand.id === brandId);
+    setSelectedBrand(foundBrand);
+    onOpen();
+  };
 
   return (
     <Container>
@@ -60,14 +66,18 @@ const Brands = () => {
             <Text>Company</Text>
             <Text>Token Earned</Text>
           </Flex>
-          <CompanyList openBrand={onOpen} brands={brands} />
+          <CompanyList
+            customerId="jrneier"
+            openBrand={(brandId) => handleBrandModal(brandId)}
+            brands={brands}
+          />
         </Box>
       </Box>
       <BrandView
         onOpen={onOpen}
         isOpen={isOpen}
         onClose={onClose}
-        currentlySelectedBrand={currentlySelectedBrand}
+        selectedBrand={selectedBrand}
       />
     </Container>
   );
