@@ -9,13 +9,12 @@ import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import Brands from './pages/User/UserDashboard';
 import BrandDashboard from './pages/Brand/BrandDashboard';
-import store from './app/store';
+import store from './store';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <Provider store={store}>
-
         <Switch>
           <Redirect exact path="/" to="/register" />
           <Route path="/register">

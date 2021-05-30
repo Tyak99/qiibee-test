@@ -32,6 +32,7 @@ const Navbar = (props) => (
             name="Tunde Nasri"
             size="sm"
             cursor="pointer"
+            src="http://res.cloudinary.com/buymezobo/image/upload/v1622232510/qiibee/v5xpjizpvfsqm0axtkc2.svg"
           />
         </Link>
       </HStack>
