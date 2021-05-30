@@ -9,7 +9,9 @@ import Icon from '@chakra-ui/icon';
 
 import PropTypes from 'prop-types';
 
-const CompanyCard = ({ isFollowing, openBrand }) => (
+// TODO: implement isFollowing
+// TODO: format loyalty points
+const CompanyCard = ({ isFollowing, openBrand, brand }) => (
   // <Link to="/brand/hmm" as={ReactRouterLink} _hover={{ underline: 'none' }}>
   <Box
     d="flex"
@@ -28,13 +30,13 @@ const CompanyCard = ({ isFollowing, openBrand }) => (
     <HStack spacing="4">
       <Avatar borderRadius="sm" />
       <Box>
-        <Heading size="sm">Fibre Limited</Heading>
-        <Text fontSize="sm">FLX</Text>
+        <Heading size="sm">{brand.name}</Heading>
+        <Text fontSize="sm">{brand.symbol}</Text>
       </Box>
     </HStack>
     <Box>
 
-      <Text display={{ base: 'none', sm: 'block' }}>0 FLX</Text>
+      <Text display={{ base: 'none', sm: 'block' }}>{`${brand.loyaltyPoints} ${brand.symbol}`}</Text>
       {
         isFollowing
       && (
@@ -53,6 +55,12 @@ CompanyCard.defaultProps = {
 CompanyCard.propTypes = {
   isFollowing: PropTypes.bool,
   openBrand: PropTypes.func.isRequired,
+  brand: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    symbol: PropTypes.string.isRequired,
+    loyaltyPoints: PropTypes.number.isRequired,
+    logo: PropTypes.string,
+  }).isRequired,
 };
 
 export default CompanyCard;

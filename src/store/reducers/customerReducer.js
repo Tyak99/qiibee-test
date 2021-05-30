@@ -7,9 +7,9 @@ const customersReducer = createSlice({
       id: 'jrneier',
       firstName: 'Tunde',
       lastName: 'Nasri',
-      email: 'tundenasri@gmail.com',
+      email: 'tunde@mail.com',
       totalLoyaltyPoints: 0,
-      followedBrand: 0,
+      followedBrands: 0,
     },
   ],
   createCustomer: (state, action) => {

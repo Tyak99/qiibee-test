@@ -5,6 +5,7 @@ import {
 import React, { useState } from 'react';
 import { Select } from '@chakra-ui/select';
 import { useDisclosure } from '@chakra-ui/hooks';
+import { useSelector } from 'react-redux';
 import Stats from '../../components/Stats';
 import CompanyList from '../../components/Companies';
 import Container from '../../components/Container';
@@ -13,6 +14,14 @@ import BrandView from './BrandViewModal';
 const Brands = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentlySelectedBrand, setCurrentlySelectedBrand] = useState(null);
+  const auth = useSelector((state) => state.auth);
+  const customers = useSelector((state) => state.customers);
+  const brands = useSelector((state) => state.brands);
+
+  const {
+    firstName, lastName, followedBrands, totalLoyaltyPoints,
+  } = customers.find((customer) => customer.id === auth.id);
+
   return (
     <Container>
       {/* <Stats /> */}
@@ -21,15 +30,15 @@ const Brands = () => {
         <Flex justifyContent="space-between">
           <Box>
             <Text>Welcome,</Text>
-            <Text>Babatunde Yakub</Text>
+            <Text>{`${firstName} ${lastName}`}</Text>
           </Box>
           <Box>
             <Text>Loyalty point</Text>
-            <Text>0</Text>
+            <Text>{totalLoyaltyPoints}</Text>
           </Box>
           <Box>
             <Text>Followed Brands</Text>
-            <Text>0</Text>
+            <Text>{followedBrands}</Text>
           </Box>
         </Flex>
       </Box>
@@ -51,7 +60,7 @@ const Brands = () => {
             <Text>Company</Text>
             <Text>Token Earned</Text>
           </Flex>
-          <CompanyList openBrand={onOpen} />
+          <CompanyList openBrand={onOpen} brands={brands} />
         </Box>
       </Box>
       <BrandView

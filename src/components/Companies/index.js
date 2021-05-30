@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import { Box } from '@chakra-ui/layout';
 import CompanyCard from './CompanyCard';
 
-const CompanyList = ({ openBrand }) => (
+const CompanyList = ({ openBrand, brands }) => (
   <Box mt="4">
-    <CompanyCard openBrand={openBrand} />
-    <CompanyCard isFollowing openBrand={openBrand} />
-    <CompanyCard openBrand={openBrand} />
-    <CompanyCard openBrand={openBrand} />
-    <CompanyCard openBrand={openBrand} />
+    {
+      brands.map((brand) => (
+        <CompanyCard openBrand={openBrand} brand={brand} key={brand.id} />
+      ))
+    }
   </Box>
 );
 
 CompanyList.propTypes = {
   openBrand: PropTypes.func.isRequired,
+  brands: PropTypes.instanceOf(PropTypes.array).isRequired,
 };
 
 export default CompanyList;
