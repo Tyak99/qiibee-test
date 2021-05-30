@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';
 import { authActions } from '../../store/reducers/authReducer';
+import { generateRandomId } from '../../helpers/randomString';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -34,20 +35,38 @@ const Register = () => {
 
   useEffect(() => {
     if (authData.isAuthenticated === true) {
-      history.push('/dashboard');
+      const redirectTo = authData.userType === 'brand' ? '/dashboard' : '/brands';
+      history.push(redirectTo);
     }
   }, [authData]);
 
   const registerBrand = (data) => {
-    const { image, ...inputData } = data;
-    dispatch(brandActions.createBrand(inputData));
-    dispatch(authActions.authenticateUser({ id: 'iewe', userType: 'brand' }));
+    const id = generateRandomId();
+    const {
+      brandName,
+      brandSymbol,
+      loyaltyPoint,
+      brandEmail,
+    } = data;
+    dispatch(customerActions.createCustomer({
+      id,
+      name: brandName,
+      symbol: brandSymbol,
+      loyaltyPoint,
+      email: brandEmail,
+      followers: [],
+    }));
+    dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
   };
 
   const registerCustomer = (data) => {
-    const { image, ...inputData } = data;
-    dispatch(customerActions.createCustomer(inputData));
-    dispatch(authActions.authenticateUser({ id: 'iewe', userType: 'brand' }));
+    // TODO: confirm that password and confirmPassword match
+    const id = generateRandomId();
+    const { firstName, lastName, customerEmail } = data;
+    dispatch(brandActions.createBrand({
+      id, firstName, lastName, email: customerEmail,
+    }));
+    dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
   };
 
   return (
@@ -92,13 +111,17 @@ const Register = () => {
                           <input type="file" accept="image/*" {...register('image')} />
                         </FormControl>
                       </HStack>
+                      <FormControl id="email" isRequired>
+                        <FormLabel>Email</FormLabel>
+                        <Input placeholder="Email" {...register('brandEmail')} />
+                      </FormControl>
                       <FormControl id="password-brand" isRequired>
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder="Password" type="password" {...register('password')} />
+                        <Input placeholder="Password" type="password" {...register('brandPassword')} />
                       </FormControl>
                       <FormControl id="confirm-password-brand" isRequired>
                         <FormLabel>Confirm password</FormLabel>
-                        <Input placeholder="Confirm Password" type="password" {...register('confirmPassword')} />
+                        <Input placeholder="Confirm Password" type="password" {...register('brandConfirmPassword')} />
                       </FormControl>
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="8" type="submit">Submit</Button>
@@ -124,15 +147,15 @@ const Register = () => {
                       </HStack>
                       <FormControl id="email" isRequired>
                         <FormLabel>Email</FormLabel>
-                        <Input placeholder="Email" {...register('email')} />
+                        <Input placeholder="Email" {...register('customerEmail')} />
                       </FormControl>
                       <FormControl id="password-customer" isRequired>
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder="Password" type="password" {...register('password')} />
+                        <Input placeholder="Password" type="password" {...register('customerPassword')} />
                       </FormControl>
                       <FormControl id="confirm-password-customer" isRequired>
                         <FormLabel>Confirm password</FormLabel>
-                        <Input placeholder="Confirm Password" type="password" {...register('confirmPassword')} />
+                        <Input placeholder="Confirm Password" type="password" {...register('customerConfirmPassword')} />
                       </FormControl>
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="12" type="submit">Submit</Button>

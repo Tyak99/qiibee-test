@@ -6,6 +6,7 @@ const brandsReducer = createSlice({
     {
       id: '93282973',
       name: 'Fibre Limited',
+      email: 'tunde@mail.com',
       symbol: 'FLX',
       loyaltyPoints: 50000,
       logo: 'https://wewiej',
