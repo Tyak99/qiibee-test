@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@chakra-ui/layout';
-import CompanyCard from './CompanyCard';
+import BrandCard from './BrandCard';
 
-const CompanyList = ({ openBrand, brands, customerId }) => (
+const BrandsList = ({ openBrand, brands, customerId }) => (
   <Box mt="4">
     {
       Object.values(brands).map((brand) => (
-        <CompanyCard
+        <BrandCard
           openBrand={openBrand}
           brand={brand}
           key={brand.id}
@@ -18,7 +18,7 @@ const CompanyList = ({ openBrand, brands, customerId }) => (
   </Box>
 );
 
-CompanyList.propTypes = {
+BrandsList.propTypes = {
   openBrand: PropTypes.func.isRequired,
   brands: PropTypes.shape({
     [PropTypes.string]: PropTypes.shape({
@@ -28,4 +28,4 @@ CompanyList.propTypes = {
   }).isRequired,
 };
 
-export default CompanyList;
+export default BrandsList;

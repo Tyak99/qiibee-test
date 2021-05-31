@@ -7,7 +7,7 @@ import {
 import PropTypes from 'prop-types';
 
 // TODO: format loyalty points
-const CompanyCard = ({ isFollowing, openBrand, brand }) => (
+const BrandCard = ({ isFollowing, openBrand, brand }) => (
   <Box
     d="flex"
     justifyContent="space-between"
@@ -43,11 +43,11 @@ const CompanyCard = ({ isFollowing, openBrand, brand }) => (
   // </Link>
 );
 
-CompanyCard.defaultProps = {
+BrandCard.defaultProps = {
   isFollowing: false,
 };
 
-CompanyCard.propTypes = {
+BrandCard.propTypes = {
   isFollowing: PropTypes.bool,
   openBrand: PropTypes.func.isRequired,
   brand: PropTypes.shape({
@@ -58,4 +58,4 @@ CompanyCard.propTypes = {
   }).isRequired,
 };
 
-export default CompanyCard;
+export default BrandCard;

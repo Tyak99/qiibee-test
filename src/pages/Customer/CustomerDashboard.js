@@ -5,13 +5,13 @@ import {
 import React, { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { useDispatch, useSelector } from 'react-redux';
-import CompanyList from '../../components/Companies';
+import BrandsList from '../../components/BrandsList';
 import Container from '../../components/Container';
-import BrandView from './BrandViewModal';
+import BrandView from '../../components/BrandViewModal';
 import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';
 
-const Brands = () => {
+const CustomerDashboard = () => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedBrandId, setSelectedBrandId] = useState(null);
@@ -91,7 +91,7 @@ const Brands = () => {
             <Text>Company</Text>
             <Text>Total Points</Text>
           </Flex>
-          <CompanyList
+          <BrandsList
             customerId="jrneier"
             openBrand={(brandId) => handleBrandModal(brandId)}
             brands={brands}
@@ -111,4 +111,4 @@ const Brands = () => {
   );
 };
 
-export default Brands;
+export default CustomerDashboard;
