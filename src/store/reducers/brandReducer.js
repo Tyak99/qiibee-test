@@ -10,12 +10,28 @@ const brandsReducer = createSlice({
       symbol: 'FLX',
       loyaltyPoints: 50000,
       logo: 'https://wewiej',
+      followers: {
+        jrneier: {
+          id: 'jrneier',
+          email: 'tunde@mail.com',
+          name: 'Tunde Nasri',
+        },
+      },
+    },
+    kjnr49384n: {
+      id: 'kjnr49384n',
+      name: 'KeyStone Bank',
+      email: 'keystone@mail.com',
+      symbol: 'KST',
+      loyaltyPoints: 700,
+      logo: 'https://wewiej',
       followers: {},
     },
   },
   reducers: {
     createBrand: (state, action) => {
-      state.push(action.payload);
+      const { id } = action.payload;
+      state[id] = action.payload;
     },
     followBrand: (state, action) => {
       const { brandId, userData } = action.payload;

@@ -48,7 +48,7 @@ const Register = () => {
       loyaltyPoint,
       brandEmail,
     } = data;
-    dispatch(customerActions.createCustomer({
+    dispatch(brandActions.createBrand({
       id,
       name: brandName,
       symbol: brandSymbol,
@@ -63,7 +63,7 @@ const Register = () => {
     // TODO: confirm that password and confirmPassword match
     const id = generateRandomId();
     const { firstName, lastName, customerEmail } = data;
-    dispatch(brandActions.createBrand({
+    dispatch(customerActions.createCustomer({
       id, firstName, lastName, email: customerEmail,
     }));
     dispatch(authActions.authenticateUser({ id, userType: 'brand' }));

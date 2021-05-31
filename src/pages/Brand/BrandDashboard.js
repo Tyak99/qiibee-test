@@ -12,58 +12,8 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control';
 
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
+import { useSelector } from 'react-redux';
 import BrandSidebar from '../../components/BrandSidebar';
-
-const followers = [
-  {
-    name: 'Tiunde Nasri',
-    amount: 0,
-    email: 'tundenasri@gmail.com',
-    isChecked: false,
-  },
-  {
-    name: 'Johnson Samuel',
-    amount: 110,
-    email: 'jsszzzx@gmail.com',
-    isChecked: false,
-
-  },
-  {
-    name: 'Tosin Samuel',
-    amount: 110,
-    email: 'ernuenr@gmail.com',
-    isChecked: false,
-
-  },
-  {
-    name: 'Busola Lamini',
-    amount: 0,
-    email: 'btrrh99@gmail.com',
-    isChecked: false,
-
-  },
-  {
-    name: 'John Doe',
-    amount: 0,
-    email: 'jd@gmail.com',
-    isChecked: false,
-
-  },
-  {
-    name: 'Skones Tops',
-    amount: 12,
-    email: 'skones@gmail.com',
-    isChecked: false,
-
-  },
-  {
-    name: 'Kira Karen',
-    amount: 0,
-    email: 'karenk@gmail.com',
-    isChecked: false,
-
-  },
-];
 
 const BrandStat = ({ amount, title }) => (
   <Box
@@ -79,58 +29,68 @@ const BrandStat = ({ amount, title }) => (
   </Box>
 );
 const BrandDashboard = (props) => {
-  const [checkedFollwers, setCheckedFollwers] = useState([]);
+  const [checkedFollowers, setCheckedFollowers] = useState([]);
+  const auth = useSelector((state) => state.auth);
+  const customers = useSelector((state) => state.customers);
+  const brand = useSelector((state) => state.brands[auth.id]);
+
+  const followers = Object.values(brand.followers).map((item) => {
+    const data = customers[item.id];
+    const earned = data.loyaltyPoints[brand.id];
+    return {
+      id: data.id, email: data.email, name: `${data.firstName} ${data.lastName}`, earned: earned || 0,
+    };
+  });
 
   const setChecked = (index, value) => {
     const item = followers[index];
 
     if (value === false) {
-      setCheckedFollwers([...checkedFollwers]
-        .filter((checkedFollower) => checkedFollower.email !== item.email));
+      setCheckedFollowers([...checkedFollowers]
+        .filter((checkedFollower) => checkedFollower.id !== item.id));
     } else {
-      setCheckedFollwers(checkedFollwers.concat(item));
+      setCheckedFollowers(checkedFollowers.concat(item.id));
     }
   };
   return (
-    <div>
-      <Box d={{ lg: 'flex' }}>
-        <BrandSidebar />
-        <Box w="100%" m="0 auto" h="100vh" ml="340px">
-          <Box mt="20" py="4" px={{ base: 0, lg: '8' }} h="100%">
-            <Box mt="8">
-              <Text>Overview</Text>
-              <Flex justifyContent="space-between" mt="4" w={{ base: '100%', lg: '700px' }}>
-                <BrandStat amount="50,000" title="Total available MBT" />
-                <BrandStat amount="101" title="Total rewarded MBT" />
-              </Flex>
-            </Box>
-            <Box mt="8">
-              <Flex justifyContent="space-between">
-                <Box>
-                  <Heading size="lg">Followers</Heading>
-                  <Text fontSize="sm">
-                    Select customers to award point and input point amount to award your
-                    loyal customers
-                  </Text>
-                </Box>
+    <Box d={{ lg: 'flex' }}>
+      <BrandSidebar brand={brand} />
+      <Box w="100%" m="0 auto" h="100vh" ml="340px">
+        <Box mt="20" py="4" px={{ base: 0, lg: '8' }} h="100%">
+          <Box mt="8">
+            <Text>Overview</Text>
+            <Flex justifyContent="space-between" mt="4" w={{ base: '100%', lg: '700px' }}>
+              <BrandStat amount={brand?.loyaltyPoints} title={`Total available ${brand?.symbol}`} />
+              <BrandStat amount="101" title={`Total rewarded ${brand?.symbol}`} />
+            </Flex>
+          </Box>
+          <Box mt="8">
+            <Flex justifyContent="space-between">
+              <Box>
+                <Heading size="lg">Followers</Heading>
+                <Text fontSize="sm">
+                  Select customers to award point and input point amount to award your
+                  loyal customers
+                </Text>
+              </Box>
 
-                <Flex>
-                  <FormControl>
-                    <Input placeholder="Amount" />
-                  </FormControl>
-                  <Button ml="4" colorScheme="teal" px="8">Award Points</Button>
-                </Flex>
+              <Flex>
+                <FormControl>
+                  <Input placeholder="Amount" />
+                </FormControl>
+                <Button ml="4" colorScheme="teal" px="8">Award Points</Button>
               </Flex>
-              <Table variant="simple" size="lg" mt="4">
-                <Thead>
-                  <Tr>
-                    <Th>Name</Th>
-                    <Th>email</Th>
-                    <Th isNumeric>Amount earned</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {
+            </Flex>
+            <Table variant="simple" size="lg" mt="4">
+              <Thead>
+                <Tr>
+                  <Th>Name</Th>
+                  <Th>email</Th>
+                  <Th isNumeric>Amount earned</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {
                   followers.map((item, index) => (
                     <Tr>
 
@@ -141,17 +101,16 @@ const BrandDashboard = (props) => {
                         </Flex>
                       </Td>
                       <Td>{item.email}</Td>
-                      <Td isNumeric>{item.amount}</Td>
+                      <Td isNumeric>{item.earned}</Td>
                     </Tr>
                   ))
                 }
-                </Tbody>
-              </Table>
-            </Box>
+              </Tbody>
+            </Table>
           </Box>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 
