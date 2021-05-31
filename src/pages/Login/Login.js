@@ -20,7 +20,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth);
   const brands = useSelector((state) => state.brands);
-  const customers = useSelector((state) => state.customers);
+  const customers = useSelector((state) => state.customers.data);
 
   const findBrand = (email) => Object.values(brands)
     .find((brand) => brand.email === email);

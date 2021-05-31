@@ -20,7 +20,7 @@ const BrandView = ({
   if (!selectedBrandId) return null;
   const [point, setPoint] = useState(0);
   const brand = useSelector((state) => state.brands[selectedBrandId]);
-  const customer = useSelector((state) => state.customers[customerId]);
+  const customer = useSelector((state) => state.customers.data[customerId]);
   const loyaltyPoints = customer.loyaltyPoints[selectedBrandId];
   const isFollowing = brand.followers[customerId];
 

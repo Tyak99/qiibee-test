@@ -27,6 +27,6 @@ reportWebVitals();
 
 // TODO: Redesign customer dashboard
 // make most button action async
-// implement password system
 // implement image preview after upload
+// implement password system
 // implement filter brands in customer dashboard

@@ -33,7 +33,7 @@ const BrandStat = ({ amount, title }) => (
 const BrandDashboard = () => {
   const [checkedFollowers, setCheckedFollowers] = useState([]);
   const auth = useSelector((state) => state.auth);
-  const customers = useSelector((state) => state.customers);
+  const customers = useSelector((state) => state.customers.data);
   const brand = useSelector((state) => state.brands[auth.id]);
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm();

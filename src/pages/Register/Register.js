@@ -64,9 +64,9 @@ const Register = () => {
     const id = generateRandomId();
     const { firstName, lastName, customerEmail } = data;
     dispatch(customerActions.createCustomer({
-      id, firstName, lastName, email: customerEmail,
+      id, firstName, lastName, email: customerEmail, loyaltyPoints: {}, followedBrands: 0,
     }));
-    dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
+    dispatch(authActions.authenticateUser({ id, userType: 'customer' }));
   };
 
   return (

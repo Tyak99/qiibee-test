@@ -18,7 +18,7 @@ const CustomerDashboard = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedBrandId, setSelectedBrandId] = useState(null);
   const auth = useSelector((state) => state.auth);
-  const customers = useSelector((state) => state.customers);
+  const customers = useSelector((state) => state.customers.data);
   const brands = useSelector((state) => state.brands);
 
   const {
