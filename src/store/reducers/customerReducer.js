@@ -23,6 +23,12 @@ const customersReducer = createSlice({
       state[customerId].loyaltyPoints[brandId] -= amount;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase('brands/followBrand', (state, action) => {
+      const { userData } = action.payload;
+      state[userData.id].followedBrands += 1;
+    });
+  },
 });
 
 export const customerActions = customersReducer.actions;
