@@ -7,12 +7,13 @@ import {
 } from '@chakra-ui/table';
 
 import { Checkbox } from '@chakra-ui/checkbox';
-import { FormControl } from '@chakra-ui/form-control';
+import { FormControl, FormErrorMessage } from '@chakra-ui/form-control';
 
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useToast } from '@chakra-ui/toast';
 import BrandSidebar from '../../components/BrandSidebar';
 import { brandActions } from '../../store/reducers/brandReducer';
 
@@ -35,13 +36,17 @@ const BrandDashboard = () => {
   const customers = useSelector((state) => state.customers);
   const brand = useSelector((state) => state.brands[auth.id]);
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const toast = useToast();
 
   const followers = Object.values(brand.followers).map((item) => {
     const data = customers[item.id];
     const earned = data.loyaltyPoints[brand.id];
     return {
-      id: data.id, email: data.email, name: `${data.firstName} ${data.lastName}`, earned: earned || 0,
+      id: data.id,
+      email: data.email,
+      name: `${data.firstName} ${data.lastName}`,
+      earned: earned || 0,
     };
   });
 
@@ -57,16 +62,26 @@ const BrandDashboard = () => {
   };
 
   const awardLoyaltyPoint = ({ points }) => {
-    if (!points) return;
     const pointsToAward = checkedFollowers.length * points;
     if (pointsToAward < brand.loyaltyPoints) {
       checkedFollowers.forEach((customerId) => {
         dispatch(brandActions
           .awardPoints({ customerId, brandId: brand.id, amount: Number(points) }));
       });
-    } else {
-      console.log('sorry boss');
+      return toast({
+        title: 'Points awarded.',
+        description: "Hooray! you've awarded points to customers :)",
+        status: 'success',
+        duration: 2000,
+      });
     }
+    return toast({
+      title: 'Inssufficient points',
+      description: "You don't have enough points to award :(",
+      status: 'error',
+      duration: 2000,
+      isClosable: true,
+    });
   };
 
   return (
@@ -96,8 +111,9 @@ const BrandDashboard = () => {
                 && (
                 <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
                   <Flex>
-                    <FormControl>
-                      <Input placeholder="Amount" {...register('points')} />
+                    <FormControl isInvalid={errors.points?.type === 'min'}>
+                      <Input placeholder="Amount" {...register('points', { min: 1 })} type="number" isRequired defaultValue={0} />
+                      <FormErrorMessage>Min points you can award is 1</FormErrorMessage>
                     </FormControl>
                     <Button type="submit" ml="4" colorScheme="teal" px="8">Award Points</Button>
                   </Flex>

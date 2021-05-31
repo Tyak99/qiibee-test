@@ -24,3 +24,12 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// TODO: Redesign customer dashboard
+// implement logo upload
+// start using redux obs for async actions
+// make most button action async
+// implement password system
+// render dashboard based on logged i user type
+// implement image preview after upload
+// implement filter brands in customer dashboard

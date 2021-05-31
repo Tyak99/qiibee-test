@@ -5,6 +5,7 @@ import {
 import React, { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { useDispatch, useSelector } from 'react-redux';
+import { useToast } from '@chakra-ui/toast';
 import BrandsList from '../../components/BrandsList';
 import Container from '../../components/Container';
 import BrandView from '../../components/BrandViewModal';
@@ -13,6 +14,7 @@ import { customerActions } from '../../store/reducers/customerReducer';
 
 const CustomerDashboard = () => {
   const dispatch = useDispatch();
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedBrandId, setSelectedBrandId] = useState(null);
   const auth = useSelector((state) => state.auth);
@@ -45,9 +47,21 @@ const CustomerDashboard = () => {
         customerId: id,
         amount: points,
       }));
-    } else {
-      console.log('You dont have that much points to redeem');
+      return toast({
+        title: 'Redeemed',
+        description: `You have redeemed ${points} points :)`,
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
     }
+    return toast({
+      title: 'Insufficient points',
+      description: "You don't have enough points to redeem :(",
+      status: 'error',
+      duration: 2000,
+      isClosable: true,
+    });
   };
 
   const totalLoyaltyPoints = Object.values(loyaltyPoints)
