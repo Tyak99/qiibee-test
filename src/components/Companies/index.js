@@ -6,12 +6,12 @@ import CompanyCard from './CompanyCard';
 const CompanyList = ({ openBrand, brands, customerId }) => (
   <Box mt="4">
     {
-      brands.map((brand) => (
+      Object.values(brands).map((brand) => (
         <CompanyCard
           openBrand={openBrand}
           brand={brand}
           key={brand.id}
-          isFollowing={brand.followers[customerId]}
+          isFollowing={!!brand.followers[customerId]}
         />
       ))
     }
@@ -20,7 +20,12 @@ const CompanyList = ({ openBrand, brands, customerId }) => (
 
 CompanyList.propTypes = {
   openBrand: PropTypes.func.isRequired,
-  brands: PropTypes.instanceOf(PropTypes.array).isRequired,
+  brands: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      name: PropTypes.string,
+      symbol: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default CompanyList;

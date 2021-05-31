@@ -1,6 +1,5 @@
 import { Avatar } from '@chakra-ui/avatar';
 import { Button } from '@chakra-ui/button';
-import { useDisclosure } from '@chakra-ui/hooks';
 import { Input } from '@chakra-ui/input';
 import {
   Flex,
@@ -13,32 +12,38 @@ import {
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import Container from '../../components/Container';
+import { useSelector } from 'react-redux';
 
 const BrandView = ({
-  onOpen, isOpen, onClose, selectedBrand,
+  onOpen, isOpen, onClose, selectedBrandId, followBrand, customerId,
 }) => {
-  const isFollowing = selectedBrand?.followers.jrneier;
+  if (!selectedBrandId) return null;
+  const brand = useSelector((state) => state.brands[selectedBrandId]);
+  const isFollowing = brand.followers[customerId];
+
   return (
     <Box>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
-          {selectedBrand
+          {selectedBrandId
           && (
             <>
-              <ModalHeader>{selectedBrand.name}</ModalHeader>
+              <ModalHeader>{brand.name}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <Flex flexDir="column" alignItems="center" mb="8">
                   <Avatar borderRadius="sm" />
+                  {/* <Text textAlign="center">Redeem your rewards</Text> */}
                   {isFollowing
                     ? (
                       <>
-                        <Heading size="md" mt="4">300points</Heading>
-                        <Text mt="4">Enter point amount to redeem</Text>
-                        <Input w="sm" />
-                        <Button mt="4" colorScheme="teal" w="sm">Redeem</Button>
+                        <Heading size="md" mt="4">0 points</Heading>
+                        {/* <Text mt="4">Enter point amount to redeem</Text> */}
+                        <Box mt="8">
+                          <Input w="sm" placeholder="Amount" />
+                          <Button mt="4" colorScheme="teal" w="sm">Redeem</Button>
+                        </Box>
                       </>
                     )
                     : (
@@ -48,7 +53,7 @@ const BrandView = ({
                           iernie
                           ernieuns iernern
                         </Text>
-                        <Button mt="4" colorScheme="teal" w="sm">Follow</Button>
+                        <Button mt="4" colorScheme="teal" w="sm" onClick={followBrand}>Follow</Button>
                       </>
                     )}
                 </Flex>
@@ -64,6 +69,7 @@ const BrandView = ({
 BrandView.proptype = {
   isOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  customerId: PropTypes.string.isRequired,
 };
 
 export default BrandView;

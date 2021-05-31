@@ -5,27 +5,38 @@ import {
 import React, { useState } from 'react';
 import { Select } from '@chakra-ui/select';
 import { useDisclosure } from '@chakra-ui/hooks';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Stats from '../../components/Stats';
 import CompanyList from '../../components/Companies';
 import Container from '../../components/Container';
 import BrandView from './BrandViewModal';
+import { brandActions } from '../../store/reducers/brandReducer';
 
 const Brands = () => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [selectedBrandId, setSelectedBrandId] = useState(null);
   const auth = useSelector((state) => state.auth);
   const customers = useSelector((state) => state.customers);
   const brands = useSelector((state) => state.brands);
 
   const {
-    firstName, lastName, followedBrands, totalLoyaltyPoints,
+    firstName, lastName, followedBrands, totalLoyaltyPoints, id, email,
   } = customers.find((customer) => customer.id === auth.id);
 
   const handleBrandModal = (brandId) => {
-    const foundBrand = brands.find((brand) => brand.id === brandId);
-    setSelectedBrand(foundBrand);
+    const foundBrand = brands[brandId];
+    setSelectedBrandId(foundBrand.id);
     onOpen();
+  };
+
+  const followBrand = () => {
+    dispatch(brandActions.followBrand({
+      brandId: selectedBrandId,
+      userData: {
+        id, firstName, lastName, email,
+      },
+    }));
   };
 
   return (
@@ -77,7 +88,9 @@ const Brands = () => {
         onOpen={onOpen}
         isOpen={isOpen}
         onClose={onClose}
-        selectedBrand={selectedBrand}
+        selectedBrandId={selectedBrandId}
+        followBrand={followBrand}
+        customerId={id}
       />
     </Container>
   );
