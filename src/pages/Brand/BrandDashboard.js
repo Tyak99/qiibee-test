@@ -12,8 +12,10 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control';
 
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import BrandSidebar from '../../components/BrandSidebar';
+import { brandActions } from '../../store/reducers/brandReducer';
 
 const BrandStat = ({ amount, title }) => (
   <Box
@@ -33,6 +35,8 @@ const BrandDashboard = (props) => {
   const auth = useSelector((state) => state.auth);
   const customers = useSelector((state) => state.customers);
   const brand = useSelector((state) => state.brands[auth.id]);
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
 
   const followers = Object.values(brand.followers).map((item) => {
     const data = customers[item.id];
@@ -52,6 +56,14 @@ const BrandDashboard = (props) => {
       setCheckedFollowers(checkedFollowers.concat(item.id));
     }
   };
+
+  const awardLoyaltyPoint = ({ points }) => {
+    if (!points) return;
+    checkedFollowers.forEach((customerId) => {
+      dispatch(brandActions.awardPoints({ customerId, brandId: brand.id, amount: points }));
+    });
+  };
+
   return (
     <Box d={{ lg: 'flex' }}>
       <BrandSidebar brand={brand} />
@@ -74,26 +86,27 @@ const BrandDashboard = (props) => {
                 </Text>
               </Box>
 
-              <Flex>
-                <FormControl>
-                  <Input placeholder="Amount" />
-                </FormControl>
-                <Button ml="4" colorScheme="teal" px="8">Award Points</Button>
-              </Flex>
+              <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
+                <Flex>
+                  <FormControl>
+                    <Input placeholder="Amount" {...register('points')} />
+                  </FormControl>
+                  <Button type="submit" ml="4" colorScheme="teal" px="8">Award Points</Button>
+                </Flex>
+              </form>
             </Flex>
             <Table variant="simple" size="lg" mt="4">
               <Thead>
                 <Tr>
                   <Th>Name</Th>
                   <Th>email</Th>
-                  <Th isNumeric>Amount earned</Th>
+                  <Th isNumeric>Points earned</Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {
                   followers.map((item, index) => (
-                    <Tr>
-
+                    <Tr key={item.id}>
                       <Td>
                         <Flex>
                           <Checkbox onChange={(e) => setChecked(index, e.target.checked)} mr="4" />

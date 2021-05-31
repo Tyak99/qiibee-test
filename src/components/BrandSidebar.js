@@ -36,7 +36,7 @@ const BrandSidebar = ({ brand }) => (
           <Box mt="4">
             <Flex justifyContent="space-between" py="4">
               <Text>Total</Text>
-              <Text>{brand.loyaltyPoint}</Text>
+              <Text>{brand.loyaltyPoints}</Text>
             </Flex>
             <Flex justifyContent="space-between" py="4" borderBottom="1px solid gray">
               <Text>Circulating</Text>
@@ -64,7 +64,10 @@ BrandSidebar.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     symbol: PropTypes.string.isRequired,
-    loyaltyPoint: PropTypes.string.isRequired,
+    loyaltyPoints: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }).isRequired,
 };
 

@@ -20,13 +20,18 @@ const customersReducer = createSlice({
     },
     redeemPoints: (state, action) => {
       const { customerId, amount, brandId } = action.payload;
-      state[customerId].loyaltyPoints[brandId] -= amount;
+      state[customerId].loyaltyPoints[brandId] -= Number(amount);
     },
   },
   extraReducers: (builder) => {
     builder.addCase('brands/followBrand', (state, action) => {
-      const { userData } = action.payload;
+      const { userData, brandId } = action.payload;
       state[userData.id].followedBrands += 1;
+      state[userData.id].loyaltyPoints[brandId] = 0;
+    });
+    builder.addCase('brands/awardPoints', (state, action) => {
+      const { customerId, brandId, amount } = action.payload;
+      state[customerId].loyaltyPoints[brandId] += Number(amount);
     });
   },
 });

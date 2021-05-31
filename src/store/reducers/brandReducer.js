@@ -37,6 +37,10 @@ const brandsReducer = createSlice({
       const { brandId, userData } = action.payload;
       state[brandId].followers[userData.id] = userData;
     },
+    awardPoints: (state, action) => {
+      const { brandId, amount } = action.payload;
+      state[brandId].loyaltyPoints -= amount;
+    },
   },
 });
 

@@ -104,7 +104,7 @@ const Register = () => {
                       <HStack spacing="8">
                         <FormControl id="loyalty-point" isRequired>
                           <FormLabel>Max Loyality Point</FormLabel>
-                          <Input placeholder="Loyalty Point" {...register('loyaltyPoint')} />
+                          <Input placeholder="Loyalty Point" {...register('loyaltyPoints')} />
                         </FormControl>
                         <FormControl id="email" isRequired>
                           <FormLabel>Logo</FormLabel>
