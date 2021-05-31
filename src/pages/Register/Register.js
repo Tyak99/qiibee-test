@@ -55,7 +55,7 @@ const Register = () => {
       loyaltyPoints,
       email: brandEmail,
       totalAwardedPoints: 0,
-      followers: [],
+      followers: {},
     }));
     dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
   };

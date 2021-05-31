@@ -20,12 +20,12 @@ const BrandView = ({
   if (!selectedBrandId) return null;
   const [point, setPoint] = useState(0);
   const brand = useSelector((state) => state.brands[selectedBrandId]);
-  const customers = useSelector((state) => state.customers);
-  const customer = customers[customerId];
+  const customer = useSelector((state) => state.customers[customerId]);
+  const loyaltyPoints = customer.loyaltyPoints[selectedBrandId];
   const isFollowing = brand.followers[customerId];
 
   const redeem = () => {
-    redeemPoints(point);
+    redeemPoints(point, loyaltyPoints);
   };
   return (
     <Box>
@@ -55,9 +55,7 @@ const BrandView = ({
                     : (
                       <>
                         <Text mt="4" w="sm" textAlign="center">
-                          Follow Fibre Limited to start earning loyality token erhje
-                          iernie
-                          ernieuns iernern
+                          {`Follow ${brand.name} to start earning loyalty token`}
                         </Text>
                         <Button mt="4" colorScheme="teal" w="sm" onClick={followBrand}>Follow</Button>
                       </>

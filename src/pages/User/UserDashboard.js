@@ -40,12 +40,16 @@ const Brands = () => {
     }));
   };
 
-  const redeemPoints = (amount) => {
-    dispatch(customerActions.redeemPoints({
-      brandId: selectedBrandId,
-      customerId: id,
-      amount,
-    }));
+  const redeemPoints = (points, totalPoints) => {
+    if (points < totalPoints) {
+      dispatch(customerActions.redeemPoints({
+        brandId: selectedBrandId,
+        customerId: id,
+        amount: points,
+      }));
+    } else {
+      console.log('You dont have that much points to redeem');
+    }
   };
 
   const totalLoyaltyPoints = Object.values(loyaltyPoints)
@@ -87,7 +91,7 @@ const Brands = () => {
           </HStack>
           <Flex justifyContent="space-between" px={{ base: '4', lg: 0 }} mt="8">
             <Text>Company</Text>
-            <Text>Token Earned</Text>
+            <Text>Total Points</Text>
           </Flex>
           <CompanyList
             customerId="jrneier"
