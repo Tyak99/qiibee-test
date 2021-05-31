@@ -7,7 +7,6 @@ import {
   Tab, TabList, TabPanel, TabPanels, Tabs,
 } from '@chakra-ui/tabs';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -17,6 +16,7 @@ import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';
 import { authActions } from '../../store/reducers/authReducer';
 import { generateRandomId } from '../../helpers/randomString';
+import AuthForm from '../../components/AuthForm';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -93,37 +93,19 @@ const Register = () => {
                     <VStack spacing="4" alignItems="flex-start">
 
                       <HStack spacing="8">
-                        <FormControl id="brand-name" isRequired>
-                          <FormLabel>Brand name</FormLabel>
-                          <Input placeholder="Brand name" {...register('brandName')} />
-                        </FormControl>
-                        <FormControl id="brand-symbol" isRequired>
-                          <FormLabel>Symbol</FormLabel>
-                          <Input placeholder="e.g MBT" {...register('brandSymbol')} />
-                        </FormControl>
+                        <AuthForm placeholder="Brand name" id="brandName" label="Brand name" formFunc={register} />
+                        <AuthForm placeholder="e.g MBT" id="brandSymbol" label="Symbol" formFunc={register} />
                       </HStack>
                       <HStack spacing="8">
-                        <FormControl id="loyalty-point" isRequired>
-                          <FormLabel>Max Loyality Point</FormLabel>
-                          <Input placeholder="Loyalty Point" {...register('loyaltyPoints')} />
-                        </FormControl>
-                        <FormControl id="email" isRequired>
+                        <AuthForm placeholder="Loyalty Point" id="loyaltyPoints" label="Max Loyalty Points" formFunc={register} />
+                        <FormControl id="image" isRequired>
                           <FormLabel>Logo</FormLabel>
                           <input type="file" accept="image/*" {...register('image')} />
                         </FormControl>
                       </HStack>
-                      <FormControl id="email" isRequired>
-                        <FormLabel>Email</FormLabel>
-                        <Input placeholder="Email" {...register('brandEmail')} />
-                      </FormControl>
-                      <FormControl id="password-brand" isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <Input placeholder="Password" type="password" {...register('brandPassword')} />
-                      </FormControl>
-                      <FormControl id="confirm-password-brand" isRequired>
-                        <FormLabel>Confirm password</FormLabel>
-                        <Input placeholder="Confirm Password" type="password" {...register('brandConfirmPassword')} />
-                      </FormControl>
+                      <AuthForm placeholder="Email" type="email" id="brandEmail" label="Email" formFunc={register} />
+                      <AuthForm placeholder="Password" type="password" id="brandPassword" label="Password" formFunc={register} />
+                      <AuthForm placeholder="Password" type="password" id="brandConfirmPassword" label="Confirm Password" formFunc={register} />
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="8" type="submit">Submit</Button>
                   </form>
@@ -137,27 +119,12 @@ const Register = () => {
                   <form onSubmit={handleSubmit(registerCustomer)}>
                     <VStack spacing="4" alignItems="flex-start">
                       <HStack spacing="8">
-                        <FormControl id="first-name" isRequired>
-                          <FormLabel>First name</FormLabel>
-                          <Input placeholder="First name" {...register('firstName')} />
-                        </FormControl>
-                        <FormControl id="last-name" isRequired>
-                          <FormLabel>Last name</FormLabel>
-                          <Input placeholder="Last name" {...register('lastName')} />
-                        </FormControl>
+                        <AuthForm placeholder="First name" id="firstName" label="First name" formFunc={register} />
+                        <AuthForm placeholder="Last name" id="lastName" label="Last name" formFunc={register} />
                       </HStack>
-                      <FormControl id="email" isRequired>
-                        <FormLabel>Email</FormLabel>
-                        <Input placeholder="Email" {...register('customerEmail')} />
-                      </FormControl>
-                      <FormControl id="password-customer" isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <Input placeholder="Password" type="password" {...register('customerPassword')} />
-                      </FormControl>
-                      <FormControl id="confirm-password-customer" isRequired>
-                        <FormLabel>Confirm password</FormLabel>
-                        <Input placeholder="Confirm Password" type="password" {...register('customerConfirmPassword')} />
-                      </FormControl>
+                      <AuthForm placeholder="Email" id="customerEmail" label="Email" formFunc={register} />
+                      <AuthForm placeholder="Password" type="password" id="customerPassword" label="Password" formFunc={register} />
+                      <AuthForm placeholder="Password" type="password" id="confirmCustomerPassword" label="Password" formFunc={register} />
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="12" type="submit">Submit</Button>
                   </form>

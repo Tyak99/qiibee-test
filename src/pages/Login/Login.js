@@ -6,13 +6,12 @@ import {
 import {
   Tab, TabList, TabPanel, TabPanels, Tabs,
 } from '@chakra-ui/tabs';
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { authActions } from '../../store/reducers/authReducer';
+import AuthForm from '../../components/AuthForm';
 
 // TODO: extract an input element to authform reuse everywhere
 const Login = () => {
@@ -23,7 +22,8 @@ const Login = () => {
   const brands = useSelector((state) => state.brands);
   const customers = useSelector((state) => state.customers);
 
-  const findBrand = (email) => Object.values(brands).find((brand) => brand.email === email);
+  const findBrand = (email) => Object.values(brands)
+    .find((brand) => brand.email === email);
   const findCustomer = (email) => Object.values(customers)
     .find((customer) => customer.email === email);
 
@@ -36,6 +36,7 @@ const Login = () => {
 
   const loginBrand = (data) => {
     const { brandEmail } = data;
+    console.log('🚀 ~ file: Login.js ~ line 41 ~ loginBrand ~ brandEmail', brandEmail);
     const foundBrand = findBrand(brandEmail);
     if (foundBrand) {
       dispatch(authActions.authenticateUser({ id: foundBrand.id, userType: 'brand' }));
@@ -43,7 +44,6 @@ const Login = () => {
   };
 
   const loginCustomer = (data) => {
-    console.log('🚀 ~ file: Login.js ~ line 47 ~ loginCustomer ~ foundCustomer');
     const { customerEmail } = data;
     const foundCustomer = findCustomer(customerEmail);
     if (foundCustomer) {
@@ -72,14 +72,8 @@ const Login = () => {
                 <Box mt="8">
                   <form onSubmit={handleSubmit(loginBrand)}>
                     <VStack spacing="4" alignItems="flex-start">
-                      <FormControl id="brand-name" isRequired>
-                        <FormLabel>Brand Email</FormLabel>
-                        <Input placeholder="Email" type="email" {...register('brandEmail')} />
-                      </FormControl>
-                      <FormControl id="passwords" isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <Input placeholder="Password" type="password" {...register('brandPassword')} />
-                      </FormControl>
+                      <AuthForm placeholder="Email" type="email" id="brandEmail" label="Brand Email" formFunc={register} />
+                      <AuthForm placeholder="Password" type="password" id="brandPassword" label="Password" formFunc={register} />
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="8" type="submit">Submit</Button>
                   </form>
@@ -92,14 +86,8 @@ const Login = () => {
                 <Box mt="8">
                   <form onSubmit={handleSubmit(loginCustomer)}>
                     <VStack spacing="4" alignItems="flex-start">
-                      <FormControl id="email" isRequired>
-                        <FormLabel>Email</FormLabel>
-                        <Input placeholder="Email" {...register('customerEmail')} />
-                      </FormControl>
-                      <FormControl id="passwords" isRequired>
-                        <FormLabel>Password</FormLabel>
-                        <Input placeholder="Password" type="password" {...register('customerPassword')} />
-                      </FormControl>
+                      <AuthForm placeholder="Email" type="email" id="customerEmail" label="Email" formFunc={register} />
+                      <AuthForm placeholder="Password" type="password" id="customerPassword" label="Password" formFunc={register} />
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="12" type="submit">Submit</Button>
                   </form>
