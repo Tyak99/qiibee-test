@@ -34,7 +34,7 @@ const BrandSidebar = ({ brand }) => {
       && (
       <Box py={5} shadow="md" h="100%">
         <Flex justifyContent="center" flexDir="column" alignItems="center">
-          <Avatar name="B N" bg="teal" color="white" />
+          <Avatar name={brand.name} bg="teal" color="white" src={brand.logo} />
           <Text>Welcome,</Text>
           <Heading size="sm">{brand.name}</Heading>
         </Flex>

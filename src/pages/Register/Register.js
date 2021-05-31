@@ -22,14 +22,12 @@ const Register = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth);
-  const uploadImage = (files) => {
-    // const formData = new FormData();
-    // formData.append('file', files[0]);
-    // formData.append('upload_preset', 'l5f01g09');
 
-    // axios.post('https://api.cloudinary.com/v1_1/buymezobo/upload', formData).then((res) => {
-    //   console.log(res);
-    // }).catch((error) => console.log({ error }));
+  const uploadBrandPhoto = (files, brandId) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'l5f01g09');
+    dispatch(brandActions.uploadBrandPhoto({ formData, brandId }));
   };
 
   useEffect(() => {
@@ -46,6 +44,7 @@ const Register = () => {
       brandSymbol,
       loyaltyPoints,
       brandEmail,
+      brandLogo,
     } = data;
     dispatch(brandActions.createBrand({
       id,
@@ -56,6 +55,7 @@ const Register = () => {
       totalAwardedPoints: 0,
       followers: {},
     }));
+    uploadBrandPhoto(brandLogo, id);
     dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
   };
 
@@ -72,7 +72,6 @@ const Register = () => {
   return (
     <Box p="16" m="0 auto" d="flex" alignItems="center" flexDir="column">
       <Box maxW="xl" w="full" mt="16">
-
         <VStack alignItems="flex-start">
           <Heading>LoyalityPro</Heading>
           <Text>Please Register as a brand or customer below</Text>
@@ -97,9 +96,9 @@ const Register = () => {
                       </HStack>
                       <HStack spacing="8">
                         <AuthForm placeholder="Loyalty Point" id="loyaltyPoints" label="Max Loyalty Points" formFunc={register} />
-                        <FormControl id="image" isRequired>
+                        <FormControl id="image">
                           <FormLabel>Logo</FormLabel>
-                          <input type="file" accept="image/*" {...register('image')} />
+                          <input type="file" accept="image/*" {...register('brandLogo')} />
                         </FormControl>
                       </HStack>
                       <AuthForm placeholder="Email" type="email" id="brandEmail" label="Email" formFunc={register} />

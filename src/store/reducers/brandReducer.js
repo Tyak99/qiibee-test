@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
+
+const uploadBrandPhoto = createAction('brands/uploadBrandPhoto');
 
 const brandsReducer = createSlice({
   name: 'brands',
@@ -38,8 +40,12 @@ const brandsReducer = createSlice({
       state[brandId].loyaltyPoints -= amount;
       state[brandId].totalAwardedPoints += amount;
     },
+    uploadBrandPhotoSuccessful: (state, action) => {
+      const { imageData, brandId } = action.payload;
+      state[brandId].logo = imageData.url;
+    },
   },
 });
 
-export const brandActions = brandsReducer.actions;
+export const brandActions = { ...brandsReducer.actions, uploadBrandPhoto };
 export default brandsReducer.reducer;

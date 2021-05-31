@@ -10,7 +10,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { createEpicMiddleware } from 'redux-observable';
 import rootReducer from './reducers';
+import rootEpic from './epics';
+
+const epicMiddleware = createEpicMiddleware();
 
 const persistConfig = {
   key: 'root',
@@ -24,11 +28,12 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'brands/uploadBrandPhoto'],
     },
-  }),
+  }).concat(epicMiddleware),
 });
 
+epicMiddleware.run(rootEpic);
 const persistor = persistStore(store);
 
 export { persistor };
