@@ -59,9 +59,15 @@ const BrandDashboard = (props) => {
 
   const awardLoyaltyPoint = ({ points }) => {
     if (!points) return;
-    checkedFollowers.forEach((customerId) => {
-      dispatch(brandActions.awardPoints({ customerId, brandId: brand.id, amount: Number(points) }));
-    });
+    const pointsToAward = checkedFollowers.length * points;
+    if (pointsToAward < brand.loyaltyPoints) {
+      checkedFollowers.forEach((customerId) => {
+        dispatch(brandActions
+          .awardPoints({ customerId, brandId: brand.id, amount: Number(points) }));
+      });
+    } else {
+      console.log('sorry boss');
+    }
   };
 
   return (
