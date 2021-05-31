@@ -47,13 +47,13 @@ const BrandDashboard = (props) => {
   });
 
   const setChecked = (index, value) => {
-    const item = followers[index];
+    const follower = followers[index];
 
     if (value === false) {
       setCheckedFollowers([...checkedFollowers]
-        .filter((checkedFollower) => checkedFollower.id !== item.id));
+        .filter((followerId) => followerId !== follower.id));
     } else {
-      setCheckedFollowers(checkedFollowers.concat(item.id));
+      setCheckedFollowers(checkedFollowers.concat(follower.id));
     }
   };
 
@@ -86,14 +86,19 @@ const BrandDashboard = (props) => {
                 </Text>
               </Box>
 
-              <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
-                <Flex>
-                  <FormControl>
-                    <Input placeholder="Amount" {...register('points')} />
-                  </FormControl>
-                  <Button type="submit" ml="4" colorScheme="teal" px="8">Award Points</Button>
-                </Flex>
-              </form>
+              {
+                checkedFollowers.length > 0
+                && (
+                <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
+                  <Flex>
+                    <FormControl>
+                      <Input placeholder="Amount" {...register('points')} />
+                    </FormControl>
+                    <Button type="submit" ml="4" colorScheme="teal" px="8">Award Points</Button>
+                  </Flex>
+                </form>
+                )
+              }
             </Flex>
             <Table variant="simple" size="lg" mt="4">
               <Thead>
