@@ -11,6 +11,7 @@ import CompanyList from '../../components/Companies';
 import Container from '../../components/Container';
 import BrandView from './BrandViewModal';
 import { brandActions } from '../../store/reducers/brandReducer';
+import { customerActions } from '../../store/reducers/customerReducer';
 
 const Brands = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ const Brands = () => {
   const brands = useSelector((state) => state.brands);
 
   const {
-    firstName, lastName, followedBrands, totalLoyaltyPoints, id, email,
-  } = customers.find((customer) => customer.id === auth.id);
+    firstName, lastName, followedBrands, loyaltyPoints, id, email,
+  } = customers[auth.id];
 
   const handleBrandModal = (brandId) => {
     const foundBrand = brands[brandId];
@@ -38,6 +39,17 @@ const Brands = () => {
       },
     }));
   };
+
+  const redeemPoints = (amount) => {
+    dispatch(customerActions.redeemPoints({
+      brandId: selectedBrandId,
+      customerId: id,
+      amount,
+    }));
+  };
+
+  const totalLoyaltyPoints = Object.values(loyaltyPoints)
+    .reduce((currentValue, acc) => currentValue + acc, 0);
 
   return (
     <Container>
@@ -91,6 +103,7 @@ const Brands = () => {
         selectedBrandId={selectedBrandId}
         followBrand={followBrand}
         customerId={id}
+        redeemPoints={redeemPoints}
       />
     </Container>
   );

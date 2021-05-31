@@ -11,16 +11,22 @@ import {
 } from '@chakra-ui/modal';
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const BrandView = ({
-  onOpen, isOpen, onClose, selectedBrandId, followBrand, customerId,
+  onOpen, isOpen, onClose, selectedBrandId, followBrand, customerId, redeemPoints,
 }) => {
   if (!selectedBrandId) return null;
+  const [point, setPoint] = useState(0);
   const brand = useSelector((state) => state.brands[selectedBrandId]);
+  const customers = useSelector((state) => state.customers);
+  const customer = customers[customerId];
   const isFollowing = brand.followers[customerId];
 
+  const redeem = () => {
+    redeemPoints(point);
+  };
   return (
     <Box>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
@@ -38,11 +44,11 @@ const BrandView = ({
                   {isFollowing
                     ? (
                       <>
-                        <Heading size="md" mt="4">0 points</Heading>
+                        <Heading size="md" mt="4">{`${customer.loyaltyPoints[selectedBrandId]} points`}</Heading>
                         {/* <Text mt="4">Enter point amount to redeem</Text> */}
                         <Box mt="8">
-                          <Input w="sm" placeholder="Amount" />
-                          <Button mt="4" colorScheme="teal" w="sm">Redeem</Button>
+                          <Input w="sm" placeholder="Amount" onChange={(e) => setPoint(e.target.value)} />
+                          <Button mt="4" colorScheme="teal" w="sm" onClick={() => redeem(point)}>Redeem</Button>
                         </Box>
                       </>
                     )

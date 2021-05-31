@@ -18,10 +18,7 @@ const brandsReducer = createSlice({
       state.push(action.payload);
     },
     followBrand: (state, action) => {
-      // find the brand cus whats to follow
-      // add a new entry to the followes list
       const { brandId, userData } = action.payload;
-      console.log('🚀 ~ file: brandReducer.js ~ line 24 ~ brandId', brandId);
       state[brandId].followers[userData.id] = userData;
     },
   },
