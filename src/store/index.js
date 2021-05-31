@@ -10,10 +10,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { PersistGate } from 'redux-persist/integration/react';
-import authReducer from './reducers/authReducer';
-import brandReducer from './reducers/brandReducer';
-import customerReducer from './reducers/customerReducer';
 import rootReducer from './reducers';
 
 const persistConfig = {
@@ -21,7 +17,7 @@ const persistConfig = {
   version: 1,
   storage,
 };
-
+// storage.removeItem('persist:root');
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({

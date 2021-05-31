@@ -23,8 +23,9 @@ const Login = () => {
   const brands = useSelector((state) => state.brands);
   const customers = useSelector((state) => state.customers);
 
-  const findBrand = (email) => brands.find((brand) => brand.email === email);
-  const findCustomer = (email) => customers.find((customer) => customer.email === email);
+  const findBrand = (email) => Object.values(brands).find((brand) => brand.email === email);
+  const findCustomer = (email) => Object.values(customers)
+    .find((customer) => customer.email === email);
 
   useEffect(() => {
     if (authData.isAuthenticated === true) {
@@ -42,6 +43,7 @@ const Login = () => {
   };
 
   const loginCustomer = (data) => {
+    console.log('🚀 ~ file: Login.js ~ line 47 ~ loginCustomer ~ foundCustomer');
     const { customerEmail } = data;
     const foundCustomer = findCustomer(customerEmail);
     if (foundCustomer) {

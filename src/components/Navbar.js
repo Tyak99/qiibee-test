@@ -4,15 +4,17 @@ import { Avatar } from '@chakra-ui/avatar';
 import {
   Box, Flex, Heading, HStack, Link, Text,
 } from '@chakra-ui/layout';
-import { Route as RouterLink } from 'react-router-dom';
+import { Route as RouterLink, useHistory } from 'react-router-dom';
 import { Button } from '@chakra-ui/button';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../store/reducers/authReducer';
 
 const Navbar = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const logOut = () => {
     dispatch(authActions.logOut());
+    history.push('/login');
   };
   return (
     <Flex

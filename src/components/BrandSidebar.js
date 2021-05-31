@@ -4,21 +4,31 @@ import { Avatar } from '@chakra-ui/avatar';
 import {
   Box, Flex, Heading, HStack, Link, Text, VStack,
 } from '@chakra-ui/layout';
-import { Route as RouterLink } from 'react-router-dom';
+import { Route as RouterLink, useHistory } from 'react-router-dom';
 import { FaAddressCard } from 'react-icons/fa';
 import Icon from '@chakra-ui/icon';
+import { useDispatch } from 'react-redux';
+import { Button } from '@chakra-ui/button';
+import { authActions } from '../store/reducers/authReducer';
 
-const BrandSidebar = ({ brand }) => (
-  <VStack
-    color="black"
-    bg="white"
-    h="100vh"
-    w="340px"
-    position="fixed"
-    borderRight="1px solid gray.100"
-    display={{ base: 'none', lg: 'block' }}
-  >
-    {
+const BrandSidebar = ({ brand }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const logOut = () => {
+    dispatch(authActions.logOut());
+    history.push('/login');
+  };
+  return (
+    <VStack
+      color="black"
+      bg="white"
+      h="100vh"
+      w="340px"
+      position="fixed"
+      borderRight="1px solid gray.100"
+      display={{ base: 'none', lg: 'block' }}
+    >
+      {
       brand
       && (
       <Box py={5} shadow="md" h="100%">
@@ -52,12 +62,15 @@ const BrandSidebar = ({ brand }) => (
               <Text fontSize="lg">Dashboard</Text>
             </HStack>
           </Box>
+
+          <Button variant="link" onClick={logOut}>Log Out</Button>
         </Box>
       </Box>
       )
     }
-  </VStack>
-);
+    </VStack>
+  );
+};
 
 BrandSidebar.propTypes = {
   brand: PropTypes.shape({

@@ -11,13 +11,7 @@ const brandsReducer = createSlice({
       loyaltyPoints: 50000,
       totalAwardedPoints: 0,
       logo: 'https://wewiej',
-      followers: {
-        jrneier: {
-          id: 'jrneier',
-          email: 'tunde@mail.com',
-          name: 'Tunde Nasri',
-        },
-      },
+      followers: {},
     },
     kjnr49384n: {
       id: 'kjnr49384n',

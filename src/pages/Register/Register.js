@@ -45,15 +45,16 @@ const Register = () => {
     const {
       brandName,
       brandSymbol,
-      loyaltyPoint,
+      loyaltyPoints,
       brandEmail,
     } = data;
     dispatch(brandActions.createBrand({
       id,
       name: brandName,
       symbol: brandSymbol,
-      loyaltyPoint,
+      loyaltyPoints,
       email: brandEmail,
+      totalAwardedPoints: 0,
       followers: [],
     }));
     dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
