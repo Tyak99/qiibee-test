@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Box, Heading, HStack, Link, Text, VStack,
@@ -10,7 +10,6 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Button } from '@chakra-ui/button';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';

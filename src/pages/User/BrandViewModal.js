@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
 import {
   Flex,
-  HStack, Text, Box, Heading,
+  Text, Box, Heading,
 } from '@chakra-ui/layout';
 
 import {

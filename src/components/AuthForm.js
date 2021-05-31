@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
-import { useForm } from 'react-hook-form';
 
 const AuthForm = ({
   placeholder, type, label, id, formFunc,

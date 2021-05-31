@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '@chakra-ui/avatar';
 import {
-  Box, Flex, Heading, HStack, Link, Text, VStack,
+  Box, Flex, Heading, HStack, Text, VStack,
 } from '@chakra-ui/layout';
-import { Route as RouterLink, useHistory } from 'react-router-dom';
-import { FaAddressCard, FaDoorOpen } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
+import { FaAddressCard } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import Icon from '@chakra-ui/icon';
 import { useDispatch } from 'react-redux';

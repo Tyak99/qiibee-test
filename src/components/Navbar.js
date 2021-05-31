@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Avatar } from '@chakra-ui/avatar';
 import {
-  Box, Flex, Heading, HStack, Link, Text,
+  Box, Flex, Heading, HStack, Link,
 } from '@chakra-ui/layout';
 import { Route as RouterLink, useHistory } from 'react-router-dom';
 import { Button } from '@chakra-ui/button';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../store/reducers/authReducer';
 
-const Navbar = (props) => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const logOut = () => {

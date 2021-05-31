@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   Heading, Box, Flex, Text,
 } from '@chakra-ui/layout';
@@ -8,7 +7,7 @@ import {
 } from '@chakra-ui/table';
 
 import { Checkbox } from '@chakra-ui/checkbox';
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import { FormControl } from '@chakra-ui/form-control';
 
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
@@ -30,7 +29,7 @@ const BrandStat = ({ amount, title }) => (
     <Text>{title}</Text>
   </Box>
 );
-const BrandDashboard = (props) => {
+const BrandDashboard = () => {
   const [checkedFollowers, setCheckedFollowers] = useState([]);
   const auth = useSelector((state) => state.auth);
   const customers = useSelector((state) => state.customers);
@@ -136,10 +135,6 @@ const BrandDashboard = (props) => {
       </Box>
     </Box>
   );
-};
-
-BrandDashboard.propTypes = {
-
 };
 
 export default BrandDashboard;

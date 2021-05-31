@@ -1,18 +1,13 @@
 import React from 'react';
 import { Avatar } from '@chakra-ui/avatar';
 import {
-  Box, Heading, HStack, Link, Text,
+  Box, Heading, HStack, Text,
 } from '@chakra-ui/layout';
-import { Link as ReactRouterLink } from 'react-router-dom';
-import { FaCheck } from 'react-icons/fa';
-import Icon from '@chakra-ui/icon';
 
 import PropTypes from 'prop-types';
 
-// TODO: implement isFollowing
 // TODO: format loyalty points
 const CompanyCard = ({ isFollowing, openBrand, brand }) => (
-  // <Link to="/brand/hmm" as={ReactRouterLink} _hover={{ underline: 'none' }}>
   <Box
     d="flex"
     justifyContent="space-between"
@@ -38,7 +33,6 @@ const CompanyCard = ({ isFollowing, openBrand, brand }) => (
 
       <Text display={{ base: 'none', sm: 'block' }}>{`${brand.loyaltyPoints} ${brand.symbol}`}</Text>
       {
-
         isFollowing
       && (
         <Text fontSize="xs" color="gray">Following</Text>

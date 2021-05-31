@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/layout';
-import Sidebar from './Sidebar';
+import { Box } from '@chakra-ui/layout';
 import Navbar from './Navbar';
 
 const Container = ({ children }) => (
