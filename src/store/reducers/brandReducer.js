@@ -9,6 +9,7 @@ const brandsReducer = createSlice({
       email: 'brand@mail.com',
       symbol: 'FLX',
       loyaltyPoints: 50000,
+      totalAwardedPoints: 0,
       logo: 'https://wewiej',
       followers: {
         jrneier: {
@@ -23,6 +24,7 @@ const brandsReducer = createSlice({
       name: 'KeyStone Bank',
       email: 'keystone@mail.com',
       symbol: 'KST',
+      totalAwardedPoints: 0,
       loyaltyPoints: 700,
       logo: 'https://wewiej',
       followers: {},
@@ -40,6 +42,7 @@ const brandsReducer = createSlice({
     awardPoints: (state, action) => {
       const { brandId, amount } = action.payload;
       state[brandId].loyaltyPoints -= amount;
+      state[brandId].totalAwardedPoints += amount;
     },
   },
 });

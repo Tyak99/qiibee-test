@@ -60,7 +60,7 @@ const BrandDashboard = (props) => {
   const awardLoyaltyPoint = ({ points }) => {
     if (!points) return;
     checkedFollowers.forEach((customerId) => {
-      dispatch(brandActions.awardPoints({ customerId, brandId: brand.id, amount: points }));
+      dispatch(brandActions.awardPoints({ customerId, brandId: brand.id, amount: Number(points) }));
     });
   };
 
@@ -73,7 +73,7 @@ const BrandDashboard = (props) => {
             <Text>Overview</Text>
             <Flex justifyContent="space-between" mt="4" w={{ base: '100%', lg: '700px' }}>
               <BrandStat amount={brand?.loyaltyPoints} title={`Total available ${brand?.symbol}`} />
-              <BrandStat amount="101" title={`Total rewarded ${brand?.symbol}`} />
+              <BrandStat amount={brand?.totalAwardedPoints} title={`Total rewarded ${brand?.symbol}`} />
             </Flex>
           </Box>
           <Box mt="8">
