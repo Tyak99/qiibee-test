@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 import { authActions } from '../../store/reducers/authReducer';
 import AuthForm from '../../components/AuthForm';
 
-// TODO: extract an input element to authform reuse everywhere
+// TODO:setup password authentication
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const history = useHistory();
@@ -36,7 +36,6 @@ const Login = () => {
 
   const loginBrand = (data) => {
     const { brandEmail } = data;
-    console.log('🚀 ~ file: Login.js ~ line 41 ~ loginBrand ~ brandEmail', brandEmail);
     const foundBrand = findBrand(brandEmail);
     if (foundBrand) {
       dispatch(authActions.authenticateUser({ id: foundBrand.id, userType: 'brand' }));

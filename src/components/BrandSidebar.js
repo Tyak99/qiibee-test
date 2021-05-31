@@ -5,7 +5,8 @@ import {
   Box, Flex, Heading, HStack, Link, Text, VStack,
 } from '@chakra-ui/layout';
 import { Route as RouterLink, useHistory } from 'react-router-dom';
-import { FaAddressCard } from 'react-icons/fa';
+import { FaAddressCard, FaDoorOpen } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
 import Icon from '@chakra-ui/icon';
 import { useDispatch } from 'react-redux';
 import { Button } from '@chakra-ui/button';
@@ -44,13 +45,9 @@ const BrandSidebar = ({ brand }) => {
           </Flex>
 
           <Box mt="4">
-            <Flex justifyContent="space-between" py="4">
+            <Flex borderBottom="1px solid gray" justifyContent="space-between" py="4">
               <Text>Total</Text>
               <Text>{brand.loyaltyPoints}</Text>
-            </Flex>
-            <Flex justifyContent="space-between" py="4" borderBottom="1px solid gray">
-              <Text>Circulating</Text>
-              <Text>0</Text>
             </Flex>
           </Box>
         </Box>
@@ -62,8 +59,9 @@ const BrandSidebar = ({ brand }) => {
               <Text fontSize="lg">Dashboard</Text>
             </HStack>
           </Box>
-
-          <Button variant="link" onClick={logOut}>Log Out</Button>
+        </Box>
+        <Box px="4" position="absolute" bottom="8">
+          <Button variant="link" onClick={logOut} leftIcon={<FiLogOut />}>Log Out</Button>
         </Box>
       </Box>
       )
