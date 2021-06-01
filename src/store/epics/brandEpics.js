@@ -2,12 +2,13 @@ import { ajax } from 'rxjs/ajax';
 import {
   filter, mergeMap, map,
 } from 'rxjs/operators';
+import { cloudinaryApi } from '../../config/config';
 import { brandActions } from '../reducers/brandReducer';
 
 const uploadBrandPhotoEpic = (action$) => action$.pipe(
   filter(brandActions.uploadBrandPhoto.match),
   mergeMap((action) => ajax({
-    url: 'https://api.cloudinary.com/v1_1/buymezobo/upload',
+    url: cloudinaryApi,
     method: 'POST',
     body: action.payload.formData,
   }).pipe(

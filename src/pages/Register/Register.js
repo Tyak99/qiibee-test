@@ -63,7 +63,6 @@ const Register = () => {
   };
 
   const registerCustomer = (data) => {
-    // TODO: confirm that password and confirmPassword match
     const id = generateRandomId();
     const { firstName, lastName, customerEmail } = data;
     dispatch(customerActions.createCustomer({
