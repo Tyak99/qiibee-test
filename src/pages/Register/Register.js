@@ -15,7 +15,7 @@ import { Avatar } from '@chakra-ui/avatar';
 import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';
 import { authActions } from '../../store/reducers/authReducer';
-import { generateRandomId } from '../../helpers/randomString';
+import { generateRandomId } from '../../helpers';
 import AuthForm from '../../components/AuthForm';
 
 const Register = () => {

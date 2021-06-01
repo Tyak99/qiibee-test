@@ -16,20 +16,8 @@ import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/toast';
 import BrandSidebar from '../../components/BrandSidebar';
 import { brandActions } from '../../store/reducers/brandReducer';
+import BrandStat from '../../components/BrandStat';
 
-const BrandStat = ({ amount, title }) => (
-  <Box
-    border="2px"
-    borderColor="gray.200"
-    p="4"
-    borderRadius="md"
-    w="72"
-    textAlign="center"
-  >
-    <Heading size="3xl">{amount}</Heading>
-    <Text>{title}</Text>
-  </Box>
-);
 const BrandDashboard = () => {
   const [checkedFollowers, setCheckedFollowers] = useState([]);
   const auth = useSelector((state) => state.auth);
@@ -87,13 +75,13 @@ const BrandDashboard = () => {
   return (
     <Box d={{ lg: 'flex' }}>
       <BrandSidebar brand={brand} />
-      <Box w="100%" m="0 auto" h="100vh" ml="340px">
-        <Box mt="20" py="4" px={{ base: 0, lg: '8' }} h="100%">
+      <Box w="100%" m="0 auto" h="100vh" ml={{ base: 0, lg: '340px' }}>
+        <Box mt="20" py="4" px="8" h="100%">
           <Box mt="8">
             <Text>Overview</Text>
             <Flex justifyContent="space-between" mt="4" w={{ base: '100%', lg: '700px' }}>
-              <BrandStat amount={brand?.loyaltyPoints} title={`Total available ${brand?.symbol}`} />
-              <BrandStat amount={brand?.totalAwardedPoints} title={`Total rewarded ${brand?.symbol}`} />
+              <BrandStat amount={brand?.loyaltyPoints} title={`Total available ${brand?.symbol}`} color="blue.500" />
+              <BrandStat amount={brand?.totalAwardedPoints} title={`Total rewarded ${brand?.symbol}`} color="red.500" />
             </Flex>
           </Box>
           <Box mt="8">
@@ -126,7 +114,7 @@ const BrandDashboard = () => {
                 <Tr>
                   <Th>Name</Th>
                   <Th>email</Th>
-                  <Th isNumeric>Points earned</Th>
+                  <Th isNumeric>Points</Th>
                 </Tr>
               </Thead>
               <Tbody>

@@ -25,7 +25,7 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-// TODO: Redesign customer dashboard
-// docs
+// TODO:
+// Redesign customer dashboard
 // implement password system
 // implement filter brands in customer dashboard

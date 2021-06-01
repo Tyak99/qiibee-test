@@ -53,10 +53,10 @@ const BrandSidebar = ({ brand }) => {
         </Box>
 
         <Box mt="16">
-          <Box borderLeft="5px solid teal">
+          <Box>
             <HStack ml={4} spacing={4}>
-              <Icon as={FaAddressCard} />
-              <Text fontSize="lg">Dashboard</Text>
+              <Icon as={FaAddressCard} color="teal.500" />
+              <Text fontSize="lg" color="teal.500">Dashboard</Text>
             </HStack>
           </Box>
         </Box>
