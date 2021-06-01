@@ -153,7 +153,7 @@ const Register = () => {
           </Tabs>
           <Box textAlign="center">
             <Text>
-              Don&lsquo;t have an account?
+              Already have an account?
               {' '}
               <Link to="/login" color="teal" as={RouterLink}>Log In</Link>
             </Text>

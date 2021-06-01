@@ -111,7 +111,6 @@ const CustomerDashboard = () => {
         </Box>
       </Box>
       <BrandView
-        onOpen={onOpen}
         isOpen={isOpen}
         onClose={onClose}
         selectedBrandId={selectedBrandId}

@@ -94,7 +94,7 @@ const Login = () => {
               </TabPanel>
               <TabPanel>
                 <Heading size="lg">Log In</Heading>
-                <Text>Please register as a customer here</Text>
+                <Text>Please log in as a customer here</Text>
 
                 <Box mt="8">
                   <form onSubmit={handleSubmit(loginCustomer)}>
