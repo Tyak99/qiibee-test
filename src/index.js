@@ -26,7 +26,6 @@ ReactDOM.render(
 reportWebVitals();
 
 // TODO: Redesign customer dashboard
-// implement image preview after upload
 // docs
 // implement password system
 // implement filter brands in customer dashboard
