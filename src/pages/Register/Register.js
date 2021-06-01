@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
-  Box, Heading, HStack, Link, Text, VStack,
+  Box, Flex, Heading, HStack, Link, Text, VStack,
 } from '@chakra-ui/layout';
 import {
   Tab, TabList, TabPanel, TabPanels, Tabs,
 } from '@chakra-ui/tabs';
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import { FormControl } from '@chakra-ui/form-control';
 import { Button } from '@chakra-ui/button';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { Avatar } from '@chakra-ui/avatar';
 import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';
 import { authActions } from '../../store/reducers/authReducer';
@@ -22,10 +23,11 @@ const Register = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth);
+  const [brandLogo, setBrandLogo] = useState({ previewUrl: '', raw: null });
 
-  const uploadBrandPhoto = (files, brandId) => {
+  const uploadBrandPhoto = (file, brandId) => {
     const formData = new FormData();
-    formData.append('file', files[0]);
+    formData.append('file', file);
     formData.append('upload_preset', 'l5f01g09');
     dispatch(brandActions.uploadBrandPhoto({ formData, brandId }));
   };
@@ -44,7 +46,6 @@ const Register = () => {
       brandSymbol,
       loyaltyPoints,
       brandEmail,
-      brandLogo,
     } = data;
     dispatch(brandActions.createBrand({
       id,
@@ -55,7 +56,9 @@ const Register = () => {
       totalAwardedPoints: 0,
       followers: {},
     }));
-    uploadBrandPhoto(brandLogo, id);
+    if (brandLogo.raw) {
+      uploadBrandPhoto(brandLogo.raw, id);
+    }
     dispatch(authActions.authenticateUser({ id, userType: 'brand' }));
   };
 
@@ -67,6 +70,16 @@ const Register = () => {
       id, firstName, lastName, email: customerEmail, loyaltyPoints: {}, followedBrands: 0,
     }));
     dispatch(authActions.authenticateUser({ id, userType: 'customer' }));
+  };
+
+  const photoHandler = (e) => {
+    if (!e.target.files[0]) return;
+    if (brandLogo.previewUrl) {
+      URL.revokeObjectURL(brandLogo.previewUrl);
+    }
+    const imageFile = e.target.files[0];
+
+    setBrandLogo({ previewUrl: URL.createObjectURL(imageFile), raw: imageFile });
   };
 
   return (
@@ -97,8 +110,20 @@ const Register = () => {
                       <HStack spacing="8">
                         <AuthForm placeholder="Loyalty Point" id="loyaltyPoints" label="Max Loyalty Points" formFunc={register} />
                         <FormControl id="image">
-                          <FormLabel>Logo</FormLabel>
-                          <input type="file" accept="image/*" {...register('brandLogo')} />
+                          <label htmlFor="uploadInput">
+                            <Flex flexDir="column" alignItems="center">
+                              <Avatar src={brandLogo.previewUrl} cursor="pointer" size="lg" />
+                              <Text mt="2" cursor="pointer">Upload Brand Logo</Text>
+                            </Flex>
+                          </label>
+                          <input
+                            id="uploadInput"
+                            type="file"
+                            accept="image/*"
+                            onChange={photoHandler}
+                            style={{ opacity: 0 }}
+                          />
+
                         </FormControl>
                       </HStack>
                       <AuthForm placeholder="Email" type="email" id="brandEmail" label="Email" formFunc={register} />

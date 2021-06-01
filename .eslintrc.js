@@ -25,5 +25,8 @@ module.exports = {
     'no-unused-vars': 'warn',
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': 'off',
+    'jsx-a11y/label-has-associated-control': [2, {
+      assert: 'either',
+    }],
   },
 };
