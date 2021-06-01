@@ -46,11 +46,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 > Note: There are two types of users - Brand, Customer.
 ### Authentication
+**Password is required for both register and login but it's not used for anything, you dont have to worry about wrong passwords**
+
  1. Visit `/register` and register as a brand
  2. Visit `/register` and register as a customer
  3. Visit `/login` and login with the credentials of a registered brand
  4. Visit `/login` and login with the credentials of a registered customer
- > Note: You need to click the logout button before you can login as a new type of user
 ### Customer Page
 1. Log In as a customer to see list of different brands along with the current balance for each brand, you can click on a brand to follow
 2. Click on a followed brand to see how many loyalty points you have, you can redeem a certain 
