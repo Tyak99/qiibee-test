@@ -5,6 +5,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 An app that allows brands award loyalty points to customers following them, similar to qiibee
 
 ## How to setup
+
+#### With Docker
+```
+Clone the repository
+$ git clone https://github.com/Tyak99/qiibee-test.git
+
+Enter the folder
+$ cd qiibee-test
+
+Run docker-compose
+$ docker-compose up
+
+```
+#### Without Docker
 ```
 Clone the repository
 $ git clone https://github.com/Tyak99/qiibee-test.git
