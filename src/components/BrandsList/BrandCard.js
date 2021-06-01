@@ -23,7 +23,7 @@ const BrandCard = ({ isFollowing, openBrand, brand }) => (
     onClick={() => openBrand(brand.id)}
   >
     <HStack spacing="4">
-      <Avatar borderRadius="sm" />
+      <Avatar borderRadius="sm" src={brand.logo} name={brand.name} />
       <Box>
         <Heading size="sm">{brand.name}</Heading>
         <Text fontSize="sm">{brand.symbol}</Text>
