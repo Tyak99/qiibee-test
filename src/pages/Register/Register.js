@@ -86,7 +86,7 @@ const Register = () => {
     <Box p="16" m="0 auto" d="flex" alignItems="center" flexDir="column">
       <Box maxW="xl" w="full" mt="16">
         <VStack alignItems="flex-start">
-          <Heading>LoyalityPro</Heading>
+          <Heading>LoyaltyPro</Heading>
           <Text>Please Register as a brand or customer below</Text>
         </VStack>
         <Box mt="16">

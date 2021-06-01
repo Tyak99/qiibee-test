@@ -28,5 +28,6 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': [2, {
       assert: 'either',
     }],
+    'consistent-return': 'warn',
   },
 };

@@ -5,6 +5,7 @@ import {
 } from '@chakra-ui/layout';
 
 import PropTypes from 'prop-types';
+import { formatNumber } from '../../helpers';
 
 // TODO: format loyalty points
 const BrandCard = ({ isFollowing, openBrand, brand }) => (
@@ -31,7 +32,7 @@ const BrandCard = ({ isFollowing, openBrand, brand }) => (
     </HStack>
     <Box>
 
-      <Text display={{ base: 'none', sm: 'block' }}>{`${brand.loyaltyPoints} ${brand.symbol}`}</Text>
+      <Text display={{ base: 'none', sm: 'block' }}>{`${formatNumber(brand.loyaltyPoints)} ${brand.symbol}`}</Text>
       {
         isFollowing
       && (

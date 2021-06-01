@@ -10,17 +10,28 @@ import { Button } from '@chakra-ui/button';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useToast } from '@chakra-ui/toast';
 import { authActions } from '../../store/reducers/authReducer';
 import AuthForm from '../../components/AuthForm';
 
 // TODO:setup password authentication
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const toast = useToast();
   const history = useHistory();
   const dispatch = useDispatch();
   const authData = useSelector((state) => state.auth);
   const brands = useSelector((state) => state.brands);
   const customers = useSelector((state) => state.customers.data);
+
+  const invalidCredentials = () => toast({
+    title: 'Invalid credentials',
+    description: 'Invalid email or password',
+    status: 'error',
+    duration: 2000,
+    position: 'top',
+    isClosable: true,
+  });
 
   const findBrand = (email) => Object.values(brands)
     .find((brand) => brand.email === email);
@@ -39,7 +50,9 @@ const Login = () => {
     const foundBrand = findBrand(brandEmail);
     if (foundBrand) {
       dispatch(authActions.authenticateUser({ id: foundBrand.id, userType: 'brand' }));
-    } // else show invalid login data error
+    } else {
+      return invalidCredentials();
+    }
   };
 
   const loginCustomer = (data) => {
@@ -47,7 +60,9 @@ const Login = () => {
     const foundCustomer = findCustomer(customerEmail);
     if (foundCustomer) {
       dispatch(authActions.authenticateUser({ id: foundCustomer.id, userType: 'customer' }));
-    } // else show invalid login data error
+    } else {
+      return invalidCredentials();
+    }
   };
 
   return (
@@ -55,7 +70,7 @@ const Login = () => {
       <Box maxW="xl" w="full" mt="16">
 
         <VStack alignItems="flex-start">
-          <Heading color="teal">LoyalityPro</Heading>
+          <Heading color="teal">LoyaltyPro</Heading>
           <Text>Please Register as a brand or customer below</Text>
         </VStack>
         <Box mt="16">
