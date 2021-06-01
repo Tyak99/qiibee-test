@@ -1,6 +1,6 @@
 import { ajax } from 'rxjs/ajax';
 import {
-  delay, mapTo, filter, mergeMap, map,
+  filter, mergeMap, map,
 } from 'rxjs/operators';
 import { brandActions } from '../reducers/brandReducer';
 

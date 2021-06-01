@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { FaAddressCard } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import Icon from '@chakra-ui/icon';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button } from '@chakra-ui/button';
 import { authActions } from '../store/reducers/authReducer';
 

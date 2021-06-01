@@ -88,21 +88,20 @@ const BrandDashboard = () => {
               loyal customers
             </Text>
           </Box>
-
           {
-                checkedFollowers.length > 0
-                && (
-                <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
-                  <Flex>
-                    <FormControl isInvalid={errors.points?.type === 'min'}>
-                      <Input placeholder="Amount" {...register('points', { min: 1 })} type="number" isRequired defaultValue={0} />
-                      <FormErrorMessage>Min points you can award is 1</FormErrorMessage>
-                    </FormControl>
-                    <Button type="submit" ml="4" colorScheme="teal" px="8">Award Points</Button>
-                  </Flex>
-                </form>
-                )
-              }
+            checkedFollowers.length > 0
+            && (
+            <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
+              <Flex>
+                <FormControl isInvalid={errors.points?.type === 'min'}>
+                  <Input placeholder="Amount" {...register('points', { min: 1 })} type="number" isRequired defaultValue={0} />
+                  <FormErrorMessage>Min points you can award is 1</FormErrorMessage>
+                </FormControl>
+                <Button type="submit" ml="4" colorScheme="teal" px="8">Award Points</Button>
+              </Flex>
+            </form>
+            )
+          }
         </Flex>
         <Table variant="simple" size="lg" mt="4">
           <Thead>
@@ -114,19 +113,19 @@ const BrandDashboard = () => {
           </Thead>
           <Tbody>
             {
-                  followers.map((item, index) => (
-                    <Tr key={item.id}>
-                      <Td>
-                        <Flex>
-                          <Checkbox onChange={(e) => setChecked(index, e.target.checked)} mr="4" />
-                          {item.name}
-                        </Flex>
-                      </Td>
-                      <Td>{item.email}</Td>
-                      <Td isNumeric>{item.earned}</Td>
-                    </Tr>
-                  ))
-                }
+              followers.map((item, index) => (
+                <Tr key={item.id}>
+                  <Td>
+                    <Flex>
+                      <Checkbox onChange={(e) => setChecked(index, e.target.checked)} mr="4" />
+                      {item.name}
+                    </Flex>
+                  </Td>
+                  <Td>{item.email}</Td>
+                  <Td isNumeric>{item.earned}</Td>
+                </Tr>
+              ))
+            }
           </Tbody>
         </Table>
       </Box>

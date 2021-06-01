@@ -15,7 +15,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const BrandView = ({
-  onOpen, isOpen, onClose, selectedBrandId, followBrand, customerId, redeemPoints,
+  isOpen, onClose, selectedBrandId, followBrand, customerId, redeemPoints,
 }) => {
   if (!selectedBrandId) return null;
   const [point, setPoint] = useState(0);
@@ -40,12 +40,10 @@ const BrandView = ({
               <ModalBody>
                 <Flex flexDir="column" alignItems="center" mb="8">
                   <Avatar borderRadius="sm" />
-                  {/* <Text textAlign="center">Redeem your rewards</Text> */}
                   {isFollowing
                     ? (
                       <>
                         <Heading size="md" mt="4">{`${customer.loyaltyPoints[selectedBrandId]} points`}</Heading>
-                        {/* <Text mt="4">Enter point amount to redeem</Text> */}
                         <Box mt="8">
                           <Input w="sm" placeholder="Amount" onChange={(e) => setPoint(e.target.value)} isRequired type="number" />
                           <Button mt="4" colorScheme="teal" w="sm" onClick={() => redeem(point)}>Redeem</Button>

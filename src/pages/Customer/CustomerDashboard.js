@@ -99,14 +99,6 @@ const CustomerDashboard = () => {
           <Text>Follow brands you love to be eligible for loyalty token rewards</Text>
         </Box>
         <Box mt="8">
-          {/* <HStack px={{ base: '4', lg: 0 }}>
-            <Text>Filter</Text>
-            <Select placeholder="Select option" w="44">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </Select>
-          </HStack> */}
           <Flex justifyContent="space-between" px={{ base: '4', lg: 0 }} mt="8">
             <Text>Company</Text>
             <Text>Total Points</Text>
