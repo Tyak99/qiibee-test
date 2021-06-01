@@ -7,7 +7,6 @@ import {
 import PropTypes from 'prop-types';
 import { formatNumber } from '../../helpers';
 
-// TODO: format loyalty points
 const BrandCard = ({ isFollowing, openBrand, brand }) => (
   <Box
     d="flex"

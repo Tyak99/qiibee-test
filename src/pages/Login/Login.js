@@ -14,7 +14,6 @@ import { useToast } from '@chakra-ui/toast';
 import { authActions } from '../../store/reducers/authReducer';
 import AuthForm from '../../components/AuthForm';
 
-// TODO:setup password authentication
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const toast = useToast();
