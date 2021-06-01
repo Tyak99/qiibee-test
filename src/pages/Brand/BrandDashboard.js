@@ -14,9 +14,9 @@ import { Button } from '@chakra-ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/toast';
-import BrandSidebar from '../../components/BrandSidebar';
 import { brandActions } from '../../store/reducers/brandReducer';
 import BrandStat from '../../components/BrandStat';
+import GlobalContainer from '../../components/GlobalContainer';
 
 const BrandDashboard = () => {
   const [checkedFollowers, setCheckedFollowers] = useState([]);
@@ -73,28 +73,23 @@ const BrandDashboard = () => {
   };
 
   return (
-    <Box d={{ lg: 'flex' }}>
-      <BrandSidebar brand={brand} />
-      <Box w="100%" m="0 auto" h="100vh" ml={{ base: 0, lg: '340px' }}>
-        <Box mt="20" py="4" px="8" h="100%">
-          <Box mt="8">
-            <Text>Overview</Text>
-            <Flex justifyContent="space-between" mt="4" w={{ base: '100%', lg: '700px' }}>
-              <BrandStat amount={brand?.loyaltyPoints} title={`Total available ${brand?.symbol}`} color="blue.500" />
-              <BrandStat amount={brand?.totalAwardedPoints} title={`Total rewarded ${brand?.symbol}`} color="red.500" />
-            </Flex>
+    <GlobalContainer>
+      <Box mt="20" px="4">
+        <Text>Overview</Text>
+        <Flex justifyContent="space-between" mt="4" w={{ base: '100%', lg: '700px' }}>
+          <BrandStat amount={brand?.loyaltyPoints} title={`Total available ${brand?.symbol}`} color="blue.500" />
+          <BrandStat amount={brand?.totalAwardedPoints} title={`Total rewarded ${brand?.symbol}`} color="red.500" />
+        </Flex>
+        <Flex justifyContent="space-between" mt="8">
+          <Box>
+            <Heading size="lg">Followers</Heading>
+            <Text fontSize="sm">
+              Select customers to award point and input point amount to award your
+              loyal customers
+            </Text>
           </Box>
-          <Box mt="8">
-            <Flex justifyContent="space-between">
-              <Box>
-                <Heading size="lg">Followers</Heading>
-                <Text fontSize="sm">
-                  Select customers to award point and input point amount to award your
-                  loyal customers
-                </Text>
-              </Box>
 
-              {
+          {
                 checkedFollowers.length > 0
                 && (
                 <form onSubmit={handleSubmit(awardLoyaltyPoint)}>
@@ -108,17 +103,17 @@ const BrandDashboard = () => {
                 </form>
                 )
               }
-            </Flex>
-            <Table variant="simple" size="lg" mt="4">
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th>email</Th>
-                  <Th isNumeric>Points</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {
+        </Flex>
+        <Table variant="simple" size="lg" mt="4">
+          <Thead>
+            <Tr>
+              <Th>Name</Th>
+              <Th>email</Th>
+              <Th isNumeric>Points</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {
                   followers.map((item, index) => (
                     <Tr key={item.id}>
                       <Td>
@@ -132,12 +127,10 @@ const BrandDashboard = () => {
                     </Tr>
                   ))
                 }
-              </Tbody>
-            </Table>
-          </Box>
-        </Box>
+          </Tbody>
+        </Table>
       </Box>
-    </Box>
+    </GlobalContainer>
   );
 };
 

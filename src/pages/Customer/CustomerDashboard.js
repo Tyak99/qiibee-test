@@ -6,8 +6,9 @@ import React, { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@chakra-ui/toast';
+import { Image } from '@chakra-ui/image';
 import BrandsList from '../../components/BrandsList';
-import Container from '../../components/Container';
+import GlobalContainer from '../../components/GlobalContainer';
 import BrandView from '../../components/BrandViewModal';
 import { brandActions } from '../../store/reducers/brandReducer';
 import { customerActions } from '../../store/reducers/customerReducer';
@@ -68,9 +69,14 @@ const CustomerDashboard = () => {
     .reduce((currentValue, acc) => currentValue + acc, 0);
 
   return (
-    <Container>
-      {/* <Stats /> */}
-      <Heading px={{ base: '4', lg: 0 }} size="md">Dashboard</Heading>
+    <GlobalContainer>
+      <Flex width="100%" alignItems="center" bg="blue.100" borderRadius={{ base: '0', lg: '3xl' }}>
+        <Image boxSize={{ base: '40', lg: '72' }} src="/giftbox.svg" transform="rotate(-20deg)" />
+        <Box ml="8">
+          <Heading fontSize={{ base: 'md', lg: '4xl' }}>Follow brands you love and earn loyalty points</Heading>
+          <Text>Brands you follow will award you loyalty token that can be redeemed</Text>
+        </Box>
+      </Flex>
       <Box mt="8" shadow="lg" borderRadius="lg" bg="white" p="6" mx={{ base: '4', lg: 0 }}>
         <Flex justifyContent="space-between">
           <Box>
@@ -79,11 +85,11 @@ const CustomerDashboard = () => {
           </Box>
           <Box>
             <Text>Loyalty point</Text>
-            <Text>{totalLoyaltyPoints}</Text>
+            <Text color="blue.500">{totalLoyaltyPoints}</Text>
           </Box>
           <Box>
             <Text>Followed Brands</Text>
-            <Text>{followedBrands}</Text>
+            <Text color="red.500">{followedBrands}</Text>
           </Box>
         </Flex>
       </Box>
@@ -121,7 +127,7 @@ const CustomerDashboard = () => {
         customerId={id}
         redeemPoints={redeemPoints}
       />
-    </Container>
+    </GlobalContainer>
   );
 };
 
