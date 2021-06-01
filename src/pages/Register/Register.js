@@ -85,7 +85,7 @@ const Register = () => {
     <Box p="16" m="0 auto" d="flex" alignItems="center" flexDir="column">
       <Box maxW="xl" w="full" mt="16">
         <VStack alignItems="flex-start">
-          <Heading>LoyaltyPro</Heading>
+          <Heading color="teal">LoyaltyPro</Heading>
           <Text>Please Register as a brand or customer below</Text>
         </VStack>
         <Box mt="16">
@@ -102,7 +102,7 @@ const Register = () => {
                   <form onSubmit={handleSubmit(registerBrand)}>
                     <VStack spacing="4" alignItems="flex-start">
 
-                      <HStack spacing="8">
+                      <HStack spacing="8" w="100%">
                         <AuthForm placeholder="Brand name" id="brandName" label="Brand name" formFunc={register} />
                         <AuthForm placeholder="e.g MBT" id="brandSymbol" label="Symbol" formFunc={register} />
                       </HStack>
@@ -122,12 +122,10 @@ const Register = () => {
                             onChange={photoHandler}
                             style={{ opacity: 0 }}
                           />
-
                         </FormControl>
                       </HStack>
                       <AuthForm placeholder="Email" type="email" id="brandEmail" label="Email" formFunc={register} />
                       <AuthForm placeholder="Password" type="password" id="brandPassword" label="Password" formFunc={register} />
-                      <AuthForm placeholder="Password" type="password" id="brandConfirmPassword" label="Confirm Password" formFunc={register} />
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="8" type="submit">Submit</Button>
                   </form>
@@ -140,13 +138,12 @@ const Register = () => {
                 <Box mt="8">
                   <form onSubmit={handleSubmit(registerCustomer)}>
                     <VStack spacing="4" alignItems="flex-start">
-                      <HStack spacing="8">
+                      <HStack spacing="8" w="100%">
                         <AuthForm placeholder="First name" id="firstName" label="First name" formFunc={register} />
                         <AuthForm placeholder="Last name" id="lastName" label="Last name" formFunc={register} />
                       </HStack>
                       <AuthForm placeholder="Email" id="customerEmail" label="Email" formFunc={register} />
                       <AuthForm placeholder="Password" type="password" id="customerPassword" label="Password" formFunc={register} />
-                      <AuthForm placeholder="Password" type="password" id="confirmCustomerPassword" label="Password" formFunc={register} />
                     </VStack>
                     <Button colorScheme="teal" w="full" mt="12" type="submit">Submit</Button>
                   </form>

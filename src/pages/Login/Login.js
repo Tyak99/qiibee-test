@@ -70,7 +70,7 @@ const Login = () => {
 
         <VStack alignItems="flex-start">
           <Heading color="teal">LoyaltyPro</Heading>
-          <Text>Please Register as a brand or customer below</Text>
+          <Text>Please Log in as a brand or customer below</Text>
         </VStack>
         <Box mt="16">
           <Tabs isFitted variant="enclosed" colorScheme="teal">
