@@ -39,7 +39,7 @@ const BrandView = ({
               <ModalCloseButton />
               <ModalBody>
                 <Flex flexDir="column" alignItems="center" mb="8">
-                  <Avatar borderRadius="sm" />
+                  <Avatar borderRadius="sm" src={brand.logo} name={brand.name} />
                   {isFollowing
                     ? (
                       <>
